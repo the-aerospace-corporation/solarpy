@@ -2,7 +2,7 @@ EQFLUX
 ========================================
 This code is taken almost line for line from the JPL GaAs Solar Cell Radiation Handbook.  The handbook publishes the FORTRAN code for EQGAFLUX.  EQGAFLUX takes RDC data, glass range tables for protons and electrons, GaAs stopping table, and an input space environment particle spectrum to determine the 1 MeV equivalent electron fluence.  This module takes that original FORTRAN code and replicates it line for line in python code.
 
-.. automodule:: solarpy.EQFLUX
+.. automodule:: solarpy.eqflux.EQFLUX
 
 
 degradation_equations
@@ -18,7 +18,7 @@ Relative damage coefficients (RDC) are used to relate the relative damage of one
 
 Note:  This module and the proton module can be combined to one rdc module.  The modules are seperate to reflect the procedure used in the JPL radiation hand books.
 
-.. automodule:: solarpy.electron_rdc
+.. automodule:: solarpy.eqflux.electron_rdc
     :members:
 
 proton_rdc
@@ -29,26 +29,25 @@ Note:  This module and the proton module can be combined to one rdc module.  The
 
 Note: Turns out since JPL EQFLUX was implemented and through DDD 10 MeV protons don't actually do much damage......sooooo hmmmmm would it be better to relate all protons to a lower proton energy.
 
-.. automodule:: solarpy.proton_rdc
-    :members:
+.. automodule:: solarpy.eqflux.proton_rdc
 
 relativeMeV_fluence
 ========================================
 This module takes the relative damage coefficients of a solar cell type and the space environment particle spectrum to arrive and total 1 MeV fluence.  Using the 1 MeV electrion radiation data used to generate the RDC curve, one can predict the expected remaining factor of the parameter of interest in a solar cell
 
-.. automodule:: solarpy.relativeMeV_fluence
+.. automodule:: solarpy.eqflux.relativeMeV_fluence
     :members:
 
 ddd
 ========================================
 Displacement damage dose (DDD) tools to convert solar cell radiation data to displacement damage dose using the non-ionizing energy loss (NIEL) for a solar cell material of interest.  DDD uses the NIEL curve to determine the displacement damage dose from each particle type and energy as opposed to the RDC method in the JPL EQFLUX method.
 
-.. automodule:: solarpy.ddd_degradation_functions
+.. automodule:: solarpy.ddd.ddd_degradation_functions
     :members:
 
 Example Class
 ========================================
 Several classes built with the library to simplify use.
 
-.. automodule:: solarpy.eqflux_aero
+.. automodule:: solarpy.examples.eqflux_aero
     :members:

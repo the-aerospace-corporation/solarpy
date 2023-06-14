@@ -79,7 +79,85 @@
   <section id="eqflux">
 <h1>EQFLUX<a class="headerlink" href="#eqflux" title="Permalink to this heading"></a></h1>
 <p>This code is taken almost line for line from the JPL GaAs Solar Cell Radiation Handbook.  The handbook publishes the FORTRAN code for EQGAFLUX.  EQGAFLUX takes RDC data, glass range tables for protons and electrons, GaAs stopping table, and an input space environment particle spectrum to determine the 1 MeV equivalent electron fluence.  This module takes that original FORTRAN code and replicates it line for line in python code.</p>
-<span class="target" id="module-solarpy.EQFLUX"></span></section>
+<span class="target" id="module-solarpy.eqflux.EQFLUX"></span><dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.EQFLUX.compute_equivalent_fluence_for_electrons">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.EQFLUX.</span></span><span class="sig-name descname"><span class="pre">compute_equivalent_fluence_for_electrons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_damage_coefficients_electrons</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">electron_integral_particle_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.EQFLUX.compute_equivalent_fluence_for_electrons" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the total 1 MeV electron fluence for a given integral electron particle spectrum and relative damage coefficients.  The function is almost a line for line translation of the JPL EQGAFLUX FORTRAN program in the GaAs Solar Cell Radiation Handbook</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relative_damage_coefficients_electrons</strong> (<em>ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the relative damage coefficients for electrons</p></li>
+<li><p><strong>electron_integral_particle_spectrum</strong> (<em>ndarray</em>) – 2d array of the integral electron particle spectrum where column 0 is the electron particle energy and column 1 is the integral fluence.  The integral particle spectrum is typically obtained using radiation enviroment models such as Ae8/Ap8 and Ae9/Ap9</p></li>
+<li><p><strong>nstep</strong> (<em>int</em>) – The integration fineness and is typically 2</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Total 1 MeV electron fluence</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.EQFLUX.compute_equivalent_fluence_for_protons">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.EQFLUX.</span></span><span class="sig-name descname"><span class="pre">compute_equivalent_fluence_for_protons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_damage_coefficients_protons</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proton_integral_particle_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.EQFLUX.compute_equivalent_fluence_for_protons" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the total 1 MeV electron fluence for a given integral electron particle spectrum and relative damage coefficients.  The function is almost a line for line translation of the JPL EQGAFLUX FORTRAN program in the GaAs Solar Cell Radiation Handbook</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relative_damage_coefficients_protons</strong> (<em>ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the relative damage coefficients for protons</p></li>
+<li><p><strong>proton_integral_particle_spectrum</strong> (<em>ndarray</em>) – 2d array of the integral proton particle spectrum where column 0 is the proton particle energy and column 1 is the integral fluence.  The integral particle spectrum is typically obtained using radiation enviroment models such as Ae8/Ap8 and Ae9/Ap9</p></li>
+<li><p><strong>nstep</strong> (<em>int</em>) – The integration fineness and is typically 2</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Total 1 MeV electron fluence</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.EQFLUX.get_log_electron_integral_spectrum">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.EQFLUX.</span></span><span class="sig-name descname"><span class="pre">get_log_electron_integral_spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">electron_integral_particle_spectrum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.EQFLUX.get_log_electron_integral_spectrum" title="Permalink to this definition"></a></dt>
+<dd><p>Generates the electron particle energy vs ln(fluence) spectrum of the integral particle spectrum in accordance with the JPL EQGAFLUX FORTRAN program as described in the GaAs Solar Cell Radiation Handbook</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>electron_integral_particle_spectrum</strong> (<em>ndarray</em>) – 2d array of the integral electron particle spectrum where column 0 is the electron particle energy and column 1 is the integral fluence.  The integral particle spectrum is typically obtained using radiation enviroment models such as Ae8/Ap8 and Ae9/Ap9</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d ndarray of the electron particle energy (column 0) vs ln(fluence) (column 1)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.EQFLUX.get_loglog_proton_integral_spectrum">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.EQFLUX.</span></span><span class="sig-name descname"><span class="pre">get_loglog_proton_integral_spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proton_integral_particle_spectrum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.EQFLUX.get_loglog_proton_integral_spectrum" title="Permalink to this definition"></a></dt>
+<dd><p>Generates the ln(proton particle energy) vs ln(fluence) spectrum of the integral particle spectrum in accordance with the JPL EQGAFLUX FORTRAN program as described in the GaAs Solar Cell Radiation Handbook</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>proton_integral_particle_spectrum</strong> (<em>ndarray</em>) – 2d array of the integral proton particle spectrum where column 0 is the proton particle energy and column 1 is the integral fluence.  The integral particle spectrum is typically obtained using radiation enviroment models such as Ae8/Ap8 and Ae9/Ap9</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d ndarray of the ln(proton particle energy) (column 0) vs ln(fluence) (column 1)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.EQFLUX.get_loglog_rdc">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.EQFLUX.</span></span><span class="sig-name descname"><span class="pre">get_loglog_rdc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_damage_coefficients</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.EQFLUX.get_loglog_rdc" title="Permalink to this definition"></a></dt>
+<dd><p>Generates the ln(particle energy) vs ln(relative damage coefficient) spectrum for a give relative damage coefficient spectrum in accordance with the JPL EQGAFLUX FORTRAN program as described in the GaAs Solar Cell Radiation Handbook</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>relative_damage_coefficients</strong> (<em>ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the relative damage coefficients</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d ndarray of the ln(particle energy) (column 0) vs ln(relative damage coefficient) (column 1)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="degradation-equations">
 <h1>degradation_equations<a class="headerlink" href="#degradation-equations" title="Permalink to this heading"></a></h1>
 <p>A set of what is know as the degradation equation as described in the JPL Solar Cell and GaAs Solar Cell Handbook.  The equation is used to fit, interpolate, and extrapolate solar cell radiation degrdation data to generate relative damage coefficients as well as displacement damage dose curves.  These equations have been empirically determined to best approximate radiation degradation data, but they do not always fit well.  This is an active area to determine the best way to relate solar cell radiation degradation to fundamental physics that govern solar cell degradatio due to radiation</p>
@@ -406,135 +484,828 @@
 <h1>electron_rdc<a class="headerlink" href="#electron-rdc" title="Permalink to this heading"></a></h1>
 <p>Relative damage coefficients (RDC) are used to relate the relative damage of one particle energy to another.  The JPL radiation handbooks relate all particle energies and types to a 1MeV electron equivalent fluence, hence the name JPL Equivalent Fluence of JPL EQFLUX method.  According the JPL Handbooks, 1 MeV electron was choose because it is readily available for ground testing and the abundance of 1 MeV electron particles in the space environment.</p>
 <p>Note:  This module and the proton module can be combined to one rdc module.  The modules are seperate to reflect the procedure used in the JPL radiation hand books.</p>
-<span class="target" id="module-solarpy.electron_rdc"></span></section>
+<span class="target" id="module-solarpy.eqflux.electron_rdc"></span><dl class="py class">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.electron_rdc_aero">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.electron_rdc.</span></span><span class="sig-name descname"><span class="pre">electron_rdc_aero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">critical_remaining_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_to_normalize_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">density_of_shield</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_thickness_cm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_range_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.electron_rdc_aero" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.electron_rdc_aero.get_energy_vs_rdc">
+<span class="sig-name descname"><span class="pre">get_energy_vs_rdc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.electron_rdc_aero.get_energy_vs_rdc" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.electron_rdc_aero.get_energy_vs_rdc_extrapolated">
+<span class="sig-name descname"><span class="pre">get_energy_vs_rdc_extrapolated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minimum_particle_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_particle_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_energy_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_energy_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.electron_rdc_aero.get_energy_vs_rdc_extrapolated" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.electron_rdc_aero.get_omnidirectional_shielded_rdc">
+<span class="sig-name descname"><span class="pre">get_omnidirectional_shielded_rdc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.electron_rdc_aero.get_omnidirectional_shielded_rdc" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.electron_rdc_aero.get_unidirectional_shielded_rdc">
+<span class="sig-name descname"><span class="pre">get_unidirectional_shielded_rdc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">incident_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.electron_rdc_aero.get_unidirectional_shielded_rdc" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.electron_rdc_aero.plot_omnidirectional_shielded_rdc">
+<span class="sig-name descname"><span class="pre">plot_omnidirectional_shielded_rdc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.electron_rdc_aero.plot_omnidirectional_shielded_rdc" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.electron_rdc_aero.plot_rdc">
+<span class="sig-name descname"><span class="pre">plot_rdc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blue'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.electron_rdc_aero.plot_rdc" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.electron_rdc_aero.plot_to_check_fits">
+<span class="sig-name descname"><span class="pre">plot_to_check_fits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qual_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.electron_rdc_aero.plot_to_check_fits" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.electron_rdc_aero.save_rdcs">
+<span class="sig-name descname"><span class="pre">save_rdcs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.electron_rdc_aero.save_rdcs" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.electron_rdc_aero.update_rdcs">
+<span class="sig-name descname"><span class="pre">update_rdcs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_particle_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_particle_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_energy_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_energy_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.electron_rdc_aero.update_rdcs" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.extrapolate_RDC">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.electron_rdc.</span></span><span class="sig-name descname"><span class="pre">extrapolate_RDC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_vs_rdc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_energy_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_energy_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.extrapolate_RDC" title="Permalink to this definition"></a></dt>
+<dd><p>Linearly extrapolates AND interpolates the RDC data. This is a wrapper function of scipy interpolate using the ‘extrapolate” keyword argument. The user can use any function they wish to interpolate or extrapolate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>energy_vs_rdc</strong> – 2d numpy array with column 0 being the particle energy and column 1 being the relative damage coefficienct</p></li>
+<li><p><strong>minimum_particle_energy</strong> – Minimum energy to start linear extrapolation of rdc data</p></li>
+<li><p><strong>maximum_particle_energy</strong> – Maximum energy to linearly extrapolate rdc data.  For example the GaAs data from the GaAs Solar Cell Radiation handbook extrapolates the low energy electron data and the data from 12MeV electrons to 40MeV electrons is extrapoloated</p></li>
+<li><p><strong>minimum_energy_rdc</strong> – 1d array of minimum energy and rdc value to extrapolate.  The first value is the particle energy and the second value is the rdc.  For electrons, the minimum energy used in The GaAs Solar Cell Radiation Handbook is 0.260 MeV and the minimum rdc value for that energy is &lt;0.1 (B. Anspaugh, ‘Proton and electron damage coefficients for GaAs/Ge solar cells’, DOI: 10.1109/PVSC.1991.169472)</p></li>
+<li><p><strong>maximum_energy_rdc</strong> – 1d array of maximum energy and rdc value to extrapolate.  For most new triple junction cells peeople use the RDCs greater than 10 MeV from the GaAs RDC data in The GaAs Solar Cell Radiation Handbook….which…I don’t agree with because there is no reference to the data see (B. Anspaugh, ‘Proton and electron damage coefficients for GaAs/Ge solar cells’, DOI: 10.1109/PVSC.1991.169472)</p></li>
+<li><p><strong>number_of_points</strong> – The number of particle energies to interpolate. refer to numpy.logspace documentation to</p></li>
+<li><p><strong>more</strong> (<em>understand</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d numpy array or energy in column 0 and relative damage coefficients in column 2 that is extrapolated and interpolated for user defined arguments</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.extrapolate_RDC_loglog">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.electron_rdc.</span></span><span class="sig-name descname"><span class="pre">extrapolate_RDC_loglog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_vs_rdc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_energy_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_energy_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.extrapolate_RDC_loglog" title="Permalink to this definition"></a></dt>
+<dd><p>Linearly extrapolates AND interpolates the loglog of RDC data. This is a wrapper function of scipy interpolate using the ‘extrapolate” keyword argument. The user can use any function they wish to interpolate or extrapolate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>energy_vs_rdc</strong> – 2d numpy array with column 0 being the particle energy and column 1 being the relative damage coefficienct</p></li>
+<li><p><strong>minimum_particle_energy</strong> – Minimum energy to start linear extrapolation of rdc data</p></li>
+<li><p><strong>maximum_particle_energy</strong> – Maximum energy to linearly extrapolate rdc data.  For example the GaAs data from the GaAs Solar Cell Radiation handbook extrapolates the low energy electron data and the data from 12MeV electrons to 40MeV electrons is extrapoloated</p></li>
+<li><p><strong>minimum_energy_rdc</strong> – 1d array of minimum energy and rdc value to extrapolate.  The first value is the particle energy and the second value is the rdc.  For electrons, the minimum energy used in The GaAs Solar Cell Radiation Handbook is 0.260 MeV and the minimum rdc value for that energy is &lt;0.1 (B. Anspaugh, ‘Proton and electron damage coefficients for GaAs/Ge solar cells’, DOI: 10.1109/PVSC.1991.169472).</p></li>
+<li><p><strong>maximum_energy_rdc</strong> – 1d array of maximum energy and rdc value to extrapolate.  For most new triple junction cells peeople use the RDCs greater than 10 MeV from the GaAs RDC data in The GaAs Solar Cell Radiation Handbook….which…I don’t agree with because there is no reference to the data see (B. Anspaugh, ‘Proton and electron damage coefficients for GaAs/Ge solar cells’, DOI: 10.1109/PVSC.1991.169472)</p></li>
+<li><p><strong>number_of_points</strong> – The number of particle energies to interpolate. refer to numpy.logspace documentation to</p></li>
+<li><p><strong>more</strong> (<em>understand</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d numpy array or energy in column 0 and relative damage coefficients in column 2 that is extrapolated and interpolated for user defined arguments</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.fitQualData">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.electron_rdc.</span></span><span class="sig-name descname"><span class="pre">fitQualData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Single</span> <span class="pre">Degradation'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.fitQualData" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.get_energy_vs_rdc">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.electron_rdc.</span></span><span class="sig-name descname"><span class="pre">get_energy_vs_rdc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">critical_remaining_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energyToNormalizeRDC</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.get_energy_vs_rdc" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the unidirectional RDC curve (energy vs RDC) given the radiation qual data, critical remaining factor, and the partcle energy you wish to relate the damage of each particel too. Uses the single degradation equation.  This is needed to calculate the fluence at which each the critical remaining factor is for each of the particle energy data sets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qual_data</strong> – 2d numpy array with three columns where column 0 is particle energy, column 1 is fluence, and column 2 is remaining factor</p></li>
+<li><p><strong>critical_remaining_factor</strong> – The remaining factor at which to relate all fluences</p></li>
+<li><p><strong>energyToNormalizeRDC</strong> – The particle energy to normalize the relative damage coefficients</p></li>
+<li><p><strong>fit_parameters</strong> – 1d numpy array include 2 parameters, one for the fitting constant C and the other for phi_x.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d numpy array of the energy in column 0 and relative damage coefficient in column 1</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.get_energy_vs_rdc_double_degradation">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.electron_rdc.</span></span><span class="sig-name descname"><span class="pre">get_energy_vs_rdc_double_degradation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">critical_remaining_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energyToNormalizeRDC</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.get_energy_vs_rdc_double_degradation" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the unidirectional RDC curve (energy vs RDC) given the radiation qual data, critical remaining factor, and the partcle energy you wish to relate the damage of each particel too. Uses double degradatin equation. This is needed to calculate the fluence at which each the critical remaining factor is for each of the particle energy data sets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qual_data</strong> – 2d numpy array with three columns where column 0 is particle energy, column 1 is fluence, and column 2 is remaining factor</p></li>
+<li><p><strong>critical_remaining_factor</strong> – The remaining factor at which to relate all fluences</p></li>
+<li><p><strong>energyToNormalizeRDC</strong> – The particle energy to normalize the relative damage coefficients</p></li>
+<li><p><strong>fit_parameters</strong> – 1d numpy array of list of parameters includes 4 parameters, C_1 and phi_x_1 for the first degradation equation and C_2 and phi_x_2 for the second degradation equation</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d numpy array of the energy in column 0 and relative damage coefficient in column 1</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.get_omnidirectional_electron_RDC_with_shielding">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.electron_rdc.</span></span><span class="sig-name descname"><span class="pre">get_omnidirectional_electron_RDC_with_shielding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_vs_rdc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass_thickness_of_shield</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_range_table</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.get_omnidirectional_electron_RDC_with_shielding" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the omnidirectional relative damage coefficient of a solar cell after some shielding, typically solar cell cover glass.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>energy_vs_rdc</strong> – 2d numpy array with column 0 being the particle energy and column 1 being the relative damage coefficienct</p></li>
+<li><p><strong>mass_thickness_of_shield</strong> – Mass thickness of the shielding being used in units of g/cm.  Derived by multiplying the density of the shield by the thickness of the shield</p></li>
+<li><p><strong>shield_range_table</strong> – Stopping power and range table for the shield</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d numpy array of energy (column 0) and relative damage coefficients (column 2).  The relative damage coefficients are calculated after going through some shielded and adjusted from unidirectional test energies to omnidirectional test energies</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.get_rdc_after_shielding">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.electron_rdc.</span></span><span class="sig-name descname"><span class="pre">get_rdc_after_shielding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_vs_rdc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass_thickness_of_shield</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_range_table</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.get_rdc_after_shielding" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the relative damage coefficient of unidirectional particles after some shielding.  The relative damage coefficienct is calculated for all angles of a particle after shielding over a hemisphere</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>energy_vs_rdc</strong> – 2d numpy array with column 0 being the particle energy and column 1 being the relative damage coefficient</p></li>
+<li><p><strong>angles</strong> – 1d numpy array of entry angles of particles. Typically over 180 degrees</p></li>
+<li><p><strong>mass_thickness_of_shield</strong> – Mass thickness of the shielding being used in units of g/cm.  Derived by multiplying the density of the shield by the thickness of the shield</p></li>
+<li><p><strong>shield_range_table</strong> – Stopping power and range table for the shield</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of 1d numpy array of relative damage coefficients for each angle of a hemisphere after a user defined shield</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.get_shielded_particle_energies">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.electron_rdc.</span></span><span class="sig-name descname"><span class="pre">get_shielded_particle_energies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particleEnergies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass_thickness_of_shield</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_range_table</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.get_shielded_particle_energies" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the energy of a particle after it passes through shielding.  The energy of the particle is calculated for all angles over 180 degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particleEnergies</strong> – </p></li>
+<li><p><strong>angles</strong> – </p></li>
+<li><p><strong>mass_thickness_of_shield</strong> – </p></li>
+<li><p><strong>shield_range_table</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of 1d numpy array of particle energies for each angle of a hemisphere after a user defined shield</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.get_unidirectional_electron_RDC_with_shielding">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.electron_rdc.</span></span><span class="sig-name descname"><span class="pre">get_unidirectional_electron_RDC_with_shielding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_vs_rdc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass_thickness_of_shield</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_range_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incident_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.get_unidirectional_electron_RDC_with_shielding" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the omnidirectional relative damage coefficient of a solar cell after some shielding, typically solar cell cover glass.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>energy_vs_rdc</strong> – 2d numpy array with column 0 being the particle energy and column 1 being the relative damage coefficienct</p></li>
+<li><p><strong>mass_thickness_of_shield</strong> – Mass thickness of the shielding being used in units of g/cm.  Derived by multiplying the density of the shield by the thickness of the shield</p></li>
+<li><p><strong>shield_range_table</strong> – Stopping power and range table for the shield</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d numpy array of energy (column 0) and relative damage coefficients (column 2).  The relative damage coefficients are calculated after going through some shielded and adjusted from unidirectional test energies to omnidirectional test energies</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.group_qual_data_by_particle_energy">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.electron_rdc.</span></span><span class="sig-name descname"><span class="pre">group_qual_data_by_particle_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qual_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.group_qual_data_by_particle_energy" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.make_rdc_dictionary">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.electron_rdc.</span></span><span class="sig-name descname"><span class="pre">make_rdc_dictionary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_vs_rdc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.make_rdc_dictionary" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.qual_data_from_file">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.electron_rdc.</span></span><span class="sig-name descname"><span class="pre">qual_data_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rdc_txt_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.qual_data_from_file" title="Permalink to this definition"></a></dt>
+<dd><p>Gets rdc curve from txt file from qual report and interpolates it
+:param rdc_txt_file:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>interpolated rdc curve</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.electron_rdc.reference_particle_fit">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.electron_rdc.</span></span><span class="sig-name descname"><span class="pre">reference_particle_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zero_fit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.electron_rdc.reference_particle_fit" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qual_data</strong> – </p></li>
+<li><p><strong>reference_energy</strong> – </p></li>
+<li><p><strong>fit_type</strong> – </p></li>
+<li><p><strong>fit_parameters</strong> – </p></li>
+<li><p><strong>zero_fit</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+</section>
 <section id="proton-rdc">
 <h1>proton_rdc<a class="headerlink" href="#proton-rdc" title="Permalink to this heading"></a></h1>
 <p>Relative damage coefficients (RDC) are used to relate the relative damage of one particle energy to another.  The JPL radiation handbooks relate all particle energies and types to a 1MeV electron equivalent fluence, hence the name JPL Equivalent Fluence of JPL EQFLUX method.  According the JPL Handbooks, 1 MeV electron was choose because it is readily available for ground testing and the abundance of 1 MeV electron particles in the space environment. For protons all protons are related to 10 MeV protons.  The 10 MeV protons are then related to 1 MeV electrons.</p>
 <p>Note:  This module and the proton module can be combined to one rdc module.  The modules are seperate to reflect the procedure used in the JPL radiation hand books</p>
 <p>Note: Turns out since JPL EQFLUX was implemented and through DDD 10 MeV protons don’t actually do much damage……sooooo hmmmmm would it be better to relate all protons to a lower proton energy.</p>
-<span class="target" id="module-solarpy.proton_rdc"></span></section>
+<span class="target" id="module-solarpy.eqflux.proton_rdc"></span><dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.proton_rdc.energyAfterGlass_single">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.proton_rdc.</span></span><span class="sig-name descname"><span class="pre">energyAfterGlass_single</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unidirectional_particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry_angles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_thickness_cm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_range_table</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.proton_rdc.energyAfterGlass_single" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.proton_rdc.get_omnidirectional_and_shielded_proton_rdc">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.proton_rdc.</span></span><span class="sig-name descname"><span class="pre">get_omnidirectional_and_shielded_proton_rdc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_vs_rdc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_range_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_range_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_displacement_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_thickness_cm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_thickness_cm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.proton_rdc.get_omnidirectional_and_shielded_proton_rdc" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the omnidirectional relative damage coefficient curve through shielding for protons following the procedures in the GaAs Solar Cell Radiation Handbook.  A key difference between this calculation and that for electrons is that protons can stop in the solar cell where they deposit most of their energy.  This end of track damage at the Bragg peak can lead to greater changes in the solar cell performance parameters.  The JPL method accounts for end of track damage by relating the the stopping distance of different energy particles and angles to that of the relative damage coefficient of the normally incident proton.  Also the relative damage coefficient is weighted by the ratio total displacements created for particle at an angle and its equivalent normal incidence energy at the same stopping depth.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>energy_vs_rdc</strong> (<em>ndarray</em>) – 2d numpy array with column 0 being the particle energy and column 1 being the relative damage coefficient</p></li>
+<li><p><strong>solar_cell_range_table</strong> (<em>ndarray</em>) – 2d numpy array of stopping range for protons in the solar cell material of interest.  Ideally this range table would be for the exact solar cell, but the range table for GaAs is typically used.  Column 1 is the proton energy and column 2 is the range in cm</p></li>
+<li><p><strong>shield_range_table</strong> (<em>ndarray</em>) – 2d numpy array where column 1 is the proton energy and column 2 is the range in cm through the shielding material. For solar cells the shield is typically some type of glass.  Stopping and range table for a shield</p></li>
+<li><p><strong>solar_cell_displacement_table</strong> (<em>ndarray</em>) – 2d numpy array where column is proton energy and column 2 is the number of displacement created by the proton in the solar cell material.  The table is generated using TRIM 2018.  By using TRIM the number of displacements can be determined for each particle energy.  In the GaAs Solar Cell handbook the displacements are calculated using a the Kinche-Pease model</p></li>
+<li><p><strong>solar_cell_thickness_cm</strong> (<em>float</em>) – Thickness of the solar cell in cm</p></li>
+<li><p><strong>shield_thickness_cm</strong> (<em>float</em>) – Thickness of the shield in cm</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Returns (ndarray):</dt><dd><p>2d numpy array where column 1 is particle energy and column 2 is the relative damage coefficient</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.proton_rdc.get_range_over_entry_angles">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.proton_rdc.</span></span><span class="sig-name descname"><span class="pre">get_range_over_entry_angles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unidirectional_particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry_angles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_thickness_cm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_range_table</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.proton_rdc.get_range_over_entry_angles" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.proton_rdc.get_unidirectional_and_shielded_proton_rdc">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.proton_rdc.</span></span><span class="sig-name descname"><span class="pre">get_unidirectional_and_shielded_proton_rdc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_vs_rdc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_range_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_range_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_displacement_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_thickness_cm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_thickness_cm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incident_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.proton_rdc.get_unidirectional_and_shielded_proton_rdc" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the unidirectional relative damage coefficient curve through shielding for protons following the procedures in the GaAs Solar Cell Radiation Handbook.  A key difference between this calculation and that for electrons is that protons can stop in the solar cell where they deposit most of their energy.  This end of track damage at the Bragg peak can lead to greater changes in the solar cell performance parameters.  The JPL method accounts for end of track damage by relating the the stopping distance of different energy particles and angles to that of the relative damage coefficient of the normally incident proton.  Also the relative damage coefficient is weighted by the ratio total displacements created for particle at an angle and its equivalent normal incidence energy at the same stopping depth.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>energy_vs_rdc</strong> (<em>ndarray</em>) – 2d numpy array with column 0 being the particle energy and column 1 being the relative damage coefficient</p></li>
+<li><p><strong>solar_cell_range_table</strong> (<em>ndarray</em>) – 2d numpy array of stopping range for protons in the solar cell material of interest.  Ideally this range table would be for the exact solar cell, but the range table for GaAs is typically used.  Column 1 is the proton energy and column 2 is the range in cm</p></li>
+<li><p><strong>shield_range_table</strong> (<em>ndarray</em>) – 2d numpy array where column 1 is the proton energy and column 2 is the range in cm through the shielding material. For solar cells the shield is typically some type of glass.  Stopping and range table for a shield</p></li>
+<li><p><strong>solar_cell_displacement_table</strong> (<em>ndarray</em>) – 2d numpy array where column is proton energy and column 2 is the number of displacement created by the proton in the solar cell material.  The table is generated using TRIM 2018.  By using TRIM the number of displacements can be determined for each particle energy.  In the GaAs Solar Cell handbook the displacements are calculated using a the Kinche-Pease model</p></li>
+<li><p><strong>solar_cell_thickness_cm</strong> (<em>float</em>) – Thickness of the solar cell in cm</p></li>
+<li><p><strong>shield_thickness_cm</strong> (<em>float</em>) – Thickness of the shield in cm</p></li>
+<li><p><strong>incident_angle</strong> (<em>float</em><em> or </em><em>ndarray</em>) – angle radiation is entering the solar cell in degrees</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Returns (ndarray):</dt><dd><p>2d numpy array where column 1 is particle energy and column 2 is the relative damage coefficient</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="solarpy.eqflux.proton_rdc.proton_rdc_aero">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.proton_rdc.</span></span><span class="sig-name descname"><span class="pre">proton_rdc_aero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">critical_remaining_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_to_normalize_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">density_of_shield</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_thickness_cm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_range_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_range_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_displacement_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_thickness_cm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.proton_rdc.proton_rdc_aero" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.proton_rdc.proton_rdc_aero.get_energy_vs_rdc">
+<span class="sig-name descname"><span class="pre">get_energy_vs_rdc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.proton_rdc.proton_rdc_aero.get_energy_vs_rdc" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.proton_rdc.proton_rdc_aero.get_energy_vs_rdc_extrapolated">
+<span class="sig-name descname"><span class="pre">get_energy_vs_rdc_extrapolated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minimum_particle_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_particle_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_energy_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_energy_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.proton_rdc.proton_rdc_aero.get_energy_vs_rdc_extrapolated" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.proton_rdc.proton_rdc_aero.get_omnidirectional_shielded_rdc">
+<span class="sig-name descname"><span class="pre">get_omnidirectional_shielded_rdc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.proton_rdc.proton_rdc_aero.get_omnidirectional_shielded_rdc" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.proton_rdc.proton_rdc_aero.get_unidirectional_shielded_rdc">
+<span class="sig-name descname"><span class="pre">get_unidirectional_shielded_rdc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">incident_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.proton_rdc.proton_rdc_aero.get_unidirectional_shielded_rdc" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.proton_rdc.proton_rdc_aero.plot_omnidirectional_shielded_rdc">
+<span class="sig-name descname"><span class="pre">plot_omnidirectional_shielded_rdc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.proton_rdc.proton_rdc_aero.plot_omnidirectional_shielded_rdc" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.proton_rdc.proton_rdc_aero.plot_rdc">
+<span class="sig-name descname"><span class="pre">plot_rdc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blue'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.proton_rdc.proton_rdc_aero.plot_rdc" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.proton_rdc.proton_rdc_aero.plot_to_check_fits">
+<span class="sig-name descname"><span class="pre">plot_to_check_fits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qual_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.proton_rdc.proton_rdc_aero.plot_to_check_fits" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.proton_rdc.proton_rdc_aero.save_rdcs">
+<span class="sig-name descname"><span class="pre">save_rdcs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.proton_rdc.proton_rdc_aero.save_rdcs" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.eqflux.proton_rdc.proton_rdc_aero.update_rdcs">
+<span class="sig-name descname"><span class="pre">update_rdcs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_particle_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_particle_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_energy_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_energy_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.proton_rdc.proton_rdc_aero.update_rdcs" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="relativemev-fluence">
 <h1>relativeMeV_fluence<a class="headerlink" href="#relativemev-fluence" title="Permalink to this heading"></a></h1>
 <p>This module takes the relative damage coefficients of a solar cell type and the space environment particle spectrum to arrive and total 1 MeV fluence.  Using the 1 MeV electrion radiation data used to generate the RDC curve, one can predict the expected remaining factor of the parameter of interest in a solar cell</p>
-<span class="target" id="module-solarpy.relativeMeV_fluence"></span></section>
+<span class="target" id="module-solarpy.eqflux.relativeMeV_fluence"></span><dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.relativeMeV_fluence.get_cumulative_relative_fluence">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.relativeMeV_fluence.</span></span><span class="sig-name descname"><span class="pre">get_cumulative_relative_fluence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_damage_coefficients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">differential_particle_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.relativeMeV_fluence.get_cumulative_relative_fluence" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the cumulative 1MeV fluence for each particle energy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relative_damage_coefficients</strong> (<em>2d ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the relative damage coefficients</p></li>
+<li><p><strong>differential_particle_spectrum</strong> (<em>2d ndarray</em>) – 2d array where column 0 contains the particle energies and column 2 contains the differential particle fluence</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d nd array where column 0 is the particle energies and column 1 is the cumulative 1 Mev fluence.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.relativeMeV_fluence.get_energy_vs_relative_fluence">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.relativeMeV_fluence.</span></span><span class="sig-name descname"><span class="pre">get_energy_vs_relative_fluence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_damage_coefficients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">differential_particle_spectrum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.relativeMeV_fluence.get_energy_vs_relative_fluence" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the energy vs 1 MeV fluence data.  The relative damage coefficients are interpolated for particle energies from the differential particle spectrum. The interpolation of the relative damage coefficients is accomplished by linear interpolation of the loglog of the relative damage coefficient. Relative damage coefficients outside the range of user supplied values is linearly extrapolated.  The interpolation and extrapolation of the relative damage coefficients is in accordance with the Solar Cell and GaAs Solar Cell Radiation Handbooks. The interpolated relative damage coefficients are multiplied by the differential fluence to yield the 1MeV fluence at each particle energy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relative_damage_coefficients</strong> (<em>2d ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the relative damage coefficients</p></li>
+<li><p><strong>differential_particle_spectrum</strong> (<em>2d ndarray</em>) – 2d array where column 0 contains the particle energies and column 2 contains the differential particle fluence</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d ndarray where column 0 is the particle energies and column 1 is the 1 MeV electron fluence. The particle energies are from the differential particle spectrum as the relative damage coefficients are interpolated and extropolated the differential particle spectrum.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.relativeMeV_fluence.get_relative_MeV_fluence_trapezoidal_integration">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.relativeMeV_fluence.</span></span><span class="sig-name descname"><span class="pre">get_relative_MeV_fluence_trapezoidal_integration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_damage_coefficients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">differential_particle_spectrum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.relativeMeV_fluence.get_relative_MeV_fluence_trapezoidal_integration" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the total 1MeV fluence given the relative damage coefficients and differential particle spectrum. The relative damage coefficients are interpolated for particle energies from the differential particle spectrum. The interpolation of the relative damage coefficients is accomplished by linear interpolation of the loglog of the relative damage coefficient. Relative damage coefficients outside the range of user supplied values is linearly extrapolated.  The interpolation and extrapolation of the relative damage coefficients is in accordance with the Solar Cell and GaAs Solar Cell Radiation Handbooks.  The interpolated relative damage coefficients are multiplied by the differential fluence to yield the 1MeV fluence at each particle energy.  The energy vs 1MeV fluence data is then integrated over all particle energies to yield the total 1MeV fluence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relative_damage_coefficients</strong> (<em>ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the relative damage coefficients</p></li>
+<li><p><strong>differential_particle_spectrum</strong> (<em>ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the differential particle fluence</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Total 1MeV fluence</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.relativeMeV_fluence.get_relative_fluence_JPL_Aero">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.relativeMeV_fluence.</span></span><span class="sig-name descname"><span class="pre">get_relative_fluence_JPL_Aero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_damage_coefficients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">differential_particle_spectrum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.relativeMeV_fluence.get_relative_fluence_JPL_Aero" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the 1 MeV electron fluence using the JPL EQFLUX method using the differential particle spectrum. The original JPL EQFLUX program takes the integral particle spectrum and does what seems like a step-by-step differentiation then a Riemann sum to arrive at the total 1 MeV fluence.  This functions also does a Riemann sum but takes out the differentiation of the integral spectrum and simply uses the differential spectrum. The differential particle spectrum for an environment is easily obtained from Spenvis on AE8/AP8 and AE9/AP9 radiation environment models.  This function is similar to the ‘oneMeVfluence_trapezoidalIntegration’ function. The difference being this function uses Riemann sum integral appoximation and the ‘oneMeVfluence_trapezoidalIntegration’ function uses trapezoidal integration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relative_damage_coefficients</strong> (<em>ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the relative damage coefficients</p></li>
+<li><p><strong>differential_particle_spectrum</strong> (<em>ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the differential particle fluence</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Total 1MeV fluence</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.relativeMeV_fluence.interpolate_electron_spectrum">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.relativeMeV_fluence.</span></span><span class="sig-name descname"><span class="pre">interpolate_electron_spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral_differential_electron_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_increment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.relativeMeV_fluence.interpolate_electron_spectrum" title="Permalink to this definition"></a></dt>
+<dd><p>Interpolates the electron particle spectrum according to The GaAs Radiation Handbook.  The Handbook suggests interpolating the integral electron spectrum using linear interpolation of the “particle energy vs log(electron fluence)”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>integral_differential_electron_spectrum</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the particle energy and column 1 is the electron fluence</p></li>
+<li><p><strong>energy_increment</strong> (<em>float</em>) – spacing in which to linearly interpolate spectrum</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 2d numpy array of the interpolated electron spectrum where column 0 is the particle energy and column 1 is the electron fluence</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.eqflux.relativeMeV_fluence.interpolate_proton_spectrum">
+<span class="sig-prename descclassname"><span class="pre">solarpy.eqflux.relativeMeV_fluence.</span></span><span class="sig-name descname"><span class="pre">interpolate_proton_spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral_differential_proton_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_increment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.eqflux.relativeMeV_fluence.interpolate_proton_spectrum" title="Permalink to this definition"></a></dt>
+<dd><p>Interpolates the proton particle spectrum according to The GaAs Radiation Handbook.  The Handbook suggests interpolating the integral pront spectrum using linear interpolation of the “log(particle energy) vs log(electron fluence)”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>integral_differential_proton_spectrum</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the particle energy and column 1 is the proton fluence</p></li>
+<li><p><strong>energy_increment</strong> (<em>float</em>) – spacing in which to linearly interpolate spectrum</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 2d numpy array of the interpolated electron spectrum where column 0 is the particle energy and column 1 is the proton fluence</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="ddd">
 <h1>ddd<a class="headerlink" href="#ddd" title="Permalink to this heading"></a></h1>
 <p>Displacement damage dose (DDD) tools to convert solar cell radiation data to displacement damage dose using the non-ionizing energy loss (NIEL) for a solar cell material of interest.  DDD uses the NIEL curve to determine the displacement damage dose from each particle type and energy as opposed to the RDC method in the JPL EQFLUX method.</p>
-<span class="target" id="module-solarpy.ddd_degradation_functions"></span></section>
+<span class="target" id="module-solarpy.ddd.ddd_degradation_functions"></span><dl class="py class">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.DDDqualData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">DDDqualData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIEL</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_to_normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.DDDqualData" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.DDDqualData.plot_ddd_fits">
+<span class="sig-name descname"><span class="pre">plot_ddd_fits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.DDDqualData.plot_ddd_fits" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.DDDqualData.update_ddd">
+<span class="sig-name descname"><span class="pre">update_ddd</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.DDDqualData.update_ddd" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.adjusted_niel">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">adjusted_niel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">niel_curve</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness_cm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.adjusted_niel" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.convertDDDelectronsToDDDprotons">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">convertDDDelectronsToDDDprotons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D_px</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D_ex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D_e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_e</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.convertDDDelectronsToDDDprotons" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.convertDDDprotonsToDDDelectrons">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">convertDDDprotonsToDDDelectrons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D_px</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D_ex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_e</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.convertDDDprotonsToDDDelectrons" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.convert_ddd_to_fluence">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">convert_ddd_to_fluence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ddd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">niel_curve</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.convert_ddd_to_fluence" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.errorFunctionBestThresholdDisplacement">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">errorFunctionBestThresholdDisplacement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIELs_vs_Td</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_energies_NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_energies_qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fluence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remaining_factor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.errorFunctionBestThresholdDisplacement" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.errorFunctionBestThresholdDisplacement_doubleDegradation">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">errorFunctionBestThresholdDisplacement_doubleDegradation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIELs_vs_Td</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_energies_NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_energies_qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fluence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remaining_factor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.errorFunctionBestThresholdDisplacement_doubleDegradation" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.error_function_nValue_for_effectiveDDD">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">error_function_nValue_for_effectiveDDD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fluence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remaining_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_to_normalize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.error_function_nValue_for_effectiveDDD" title="Permalink to this definition"></a></dt>
+<dd><p>Error function used to find the the n value for radiation qualification data that does not collapse when using displacement damage dose.  For protons this has empirically determined to be 1 and for electrons the n value can range from 0.3-4</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameter</strong> – n value guess to minimize</p></li>
+<li><p><strong>particle_energy</strong> – particle energy</p></li>
+<li><p><strong>fluence</strong> – 1d numpy array of fluence</p></li>
+<li><p><strong>remaining_factor</strong> – 1d array of remaining factor of interest</p></li>
+<li><p><strong>NIEL</strong> – 2d numpy array of particle energies in column 0 and nonionizing energy loss (NIEL) in column 1</p></li>
+<li><p><strong>energy_to_normalize</strong> – particle energy to normalize the effective displacement damage dose curve. This value is typically 1 for 1MeV electrons</p></li>
+<li><p><strong>fit_type</strong> – fit using single degradation equation, ‘single’, or double degradation equation, ‘double’.  May add another option to fit using the A parameter</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>will look into using chi_squared instead</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Error to be minimized by using 1 - r2.  # TODO</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.fitToFindThresholdDisplacement">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">fitToFindThresholdDisplacement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">NIELs_vs_Td</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_energies_NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_energies_qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fluence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remaining_factor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.fitToFindThresholdDisplacement" title="Permalink to this definition"></a></dt>
+<dd><p>Fit to find the best NIEL curve to fit displacement damage dose data that does not collapse using the single degradation equation.  The NIEL curves are selected based on the threshold displacement energy (Td) used to derive the NIEL curve.  This function takes a 2d table where x is Td and y is the particle energy to do interpolation to determine the best NIEL curve on Td.  Once the appropriate NIEL Td curve has been determined the actual NIEL curve using the Td derived from this fit should be used to check if it is correct. This is because 2d linear interpolation is used to derive the appropriate NIEL curve.  So far it looks to fit pretty well</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>NIELs_vs_Td</strong> – 2d numpy array of NIEL values only where the x values or columns are the threshold displacement energies used to calculate the NIEL curves and the y values or rows are the particle energies of the NIEL curves</p></li>
+<li><p><strong>Tds</strong> – 1d numpy array of the threshold displacement energies of the NIEL values in the NIELs_vs_Td data set</p></li>
+<li><p><strong>particle_energies_NIEL</strong> – 1d numpy array of the particle energies of the NIEL values in the NEIL_vs_Td data set</p></li>
+<li><p><strong>particle_energies_qual_data</strong> – 1d numpy array of the particle energies of the radiation data to be collapsed using displacement damage dose method</p></li>
+<li><p><strong>fluence</strong> – 1d numpy array of of the fluences of the radiation data to be collapsed using displacement damage dose method</p></li>
+<li><p><strong>remaining_factor</strong> – of the remaining factors of the radiation data to be collapsed using displacement damage dose method</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Threshold displament energy of the NIEL curve that collapse the radiation data using a n value of 1</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.fitToFindThresholdDisplacement_double_degradation">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">fitToFindThresholdDisplacement_double_degradation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">NIELs_vs_Td</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_energies_NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_energies_qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fluence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remaining_factor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.fitToFindThresholdDisplacement_double_degradation" title="Permalink to this definition"></a></dt>
+<dd><p>Fit to find the best NIEL curve to fit displacement damage dose data that does not collapse using the double degradation equation.  The NIEL curves are selected based on the threshold displacement energy (Td) used to derive the NIEL curve.  This function takes a 2d table where x is Td and y is the particle energy to do interpolation to determine the best NIEL curve on Td.  Once the appropriate NIEL Td curve has been determined the actual NIEL curve using the Td derived from this fit should be used to check if it is correct. This is because 2d linear interpolation is used to derive the appropriate NIEL curve.  So far it looks to fit pretty well</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>NIELs_vs_Td</strong> – 2d numpy array of NIEL values only where the x values or colums are the threshold displacement energies used to calculate the NIEL curves and the y values or rows are the particle energies of the NIEL curves</p></li>
+<li><p><strong>Tds</strong> – 1d numpy array of the threshold displacement energies of the NIEL values in the NIELs_vs_Td data set</p></li>
+<li><p><strong>particle_energies_NIEL</strong> – 1d numpy array of the particle energies of the NIEL values in the NEIL_vs_Td data set</p></li>
+<li><p><strong>particle_energies_qual_data</strong> – 1d numpy array of the particle energies of the radiation data to be collapsed using displacement damage dose method</p></li>
+<li><p><strong>fluence</strong> – 1d numpy array of of the fluences of the radiation data to be collapsed using displacement damage dose method</p></li>
+<li><p><strong>remaining_factor</strong> – of the remaining factors of the radiation data to be collapsed using displacement damage dose method</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Threshold displament energy of the NIEL curve that collapse the radiation data using a n value of 1</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.fit_nValue_effectiveDDD">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">fit_nValue_effectiveDDD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fluence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remaining_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_to_normalize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'single'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.fit_nValue_effectiveDDD" title="Permalink to this definition"></a></dt>
+<dd><p>Give the particle energies, fluences, and remaining factors of an irradiated cell this function fits the data to find the n_value that best collapses the displacement damage dose curves.  The function minimizes by fitting the displacement damage dose curves using the degradation equation and n value to find the best bit using r squared as the fitting parameter.  I have found this to provide better fits than those in the SCREAM model fits</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_energy</strong> (<em>ndarray of float</em>) – 1d numpy array of particle energies or single float value of particle energies</p></li>
+<li><p><strong>fluence</strong> (<em>ndarray</em>) – 1d numpy array of fluences.  The fluences are converted to displacement damage dose using the NIEL curve</p></li>
+<li><p><strong>remaining_factor</strong> (<em>ndarray</em>) – 1d numpy array of remaining factors for each fluence</p></li>
+<li><p><strong>NIEL</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the particle energy and column 1 is the Non Ionizing Energy Loss of the material</p></li>
+<li><p><strong>energy_to_normalize</strong> (<em>float</em>) – particle energy to normalize the effective displacement damage dose curve. This value is typically 1 for 1MeV electrons</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The n value that best collapses the displacement damage dose curves</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.getTotalDDD">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">getTotalDDD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_vs_ddd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.getTotalDDD" title="Permalink to this definition"></a></dt>
+<dd><p>Takes a given displacement damage dose particle spectrum and calculates the total displacement damage dose expected for a given environment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>energy_vs_ddd</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the particle energy and column 1 is the displacment damage does per particle energy</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The total displacement damage does in a given particle environment</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.get_cumulative_ddd">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">get_cumulative_ddd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_to_normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.get_cumulative_ddd" title="Permalink to this definition"></a></dt>
+<dd><p>Return the cumulative displacement damage dose spectrum for a give environment particle spectrum using the non-ionizing energy loss curve</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_spectrum</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the particle energy and column 1 is the partcle fluence</p></li>
+<li><p><strong>NIEL</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the particle energy and column 1 is the non-ionizing energy loss</p></li>
+<li><p><strong>(</strong><strong>float</strong> (<em>energy_to_normalize</em>) – The energy to relate all displacement damage dose curves to.  For electrons this is typically 1</p></li>
+<li><p><strong>n_value</strong> (<em>float</em>) – Empirically determined fitting parameter to collapse displacement damage dose curves that do not collapse. It is 1 for protons</p></li>
+<li><p><strong>norm</strong> (<em>bool</em>) – Optional argument to normalize the cumulative ddisplacement damage dose to 1 if set to True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d numpy array where column 0 is the particle energy and column 1 is the cumulative displacement damage dose</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.get_ddd">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">get_ddd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fluence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_to_normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.get_ddd" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the  displacement damage dose.  For protons the “n” value is 1 and the energy to normalize isn’t necessary. When calculating effective displacement damage dose an empirically determined “n” value is used to collapse the electron displacement damage curves for different particle energies.  The n value can be derived by fitting displacement damage curves to for a n until they collapse.  N can be anywhere from 0 to 4 as determined in the literature</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_energy</strong> – particle energy</p></li>
+<li><p><strong>fluence</strong> – fluence</p></li>
+<li><p><strong>NIEL</strong> – 2d numpy array of particle energies in column 0 and nonionizing energy loss (NIEL) in column 1</p></li>
+<li><p><strong>energy_to_normalize</strong> – particle energy to normalize the effective displacement damage dose curve. This value is typically 1 for 1MeV electrons</p></li>
+<li><p><strong>n_value</strong> – Empirically determined fitting parameter to collapse displacement damage dose curves that do not collapse. It is 1 for protons</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>1d numpy array of effective displacement damage dose</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.get_ddd_vs_remaining_factor">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">get_ddd_vs_remaining_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fluence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remaining_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_to_normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.get_ddd_vs_remaining_factor" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the 2d numpy array of displacement damage dose vs energy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_energy</strong> (<em>ndarray</em><em> or </em><em>float</em>) – particle energy</p></li>
+<li><p><strong>fluence</strong> (<em>ndarray</em>) – 1d numpy array of fluence</p></li>
+<li><p><strong>remaining_factor</strong> (<em>ndarray</em>) – 1d array of remaining factor of interest</p></li>
+<li><p><strong>NIEL</strong> (<em>ndarray</em>) – 2d numpy array of particle energies in column 0 and nonionizing energy loss (NIEL) in column 1</p></li>
+<li><p><strong>energy_to_normalize</strong> (<em>float</em>) – particle energy to normalize the effective displacement damage dose curve. This value is typically 1 for 1MeV electrons</p></li>
+<li><p><strong>n</strong> (<em>float</em>) – Empirically determined fitting parameter to collapse displacement damage dose curves that do not collapse. It is 1 for protons</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d numpy array where column 0 is the displacement damage dose and column 1 is the remaining factor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.get_ddd_vs_remaining_factor_by_particle_energy">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">get_ddd_vs_remaining_factor_by_particle_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_to_normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.get_ddd_vs_remaining_factor_by_particle_energy" title="Permalink to this definition"></a></dt>
+<dd><p>Organizes a table of radiation qualification data into groups based on particle energy.  This function is useful for organizing radiation qualification data tables for plotting and analysis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qual_data</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is hte particle energy for each fluence, column 1 is the fluence, and column 2 is the remaining factor</p></li>
+<li><p><strong>NIEL</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the particle energy and column 1 is the non-ionizing energy loss</p></li>
+<li><p><strong>(</strong><strong>float</strong> (<em>energy_to_normalize</em>) – The energy to relate all displacement damage dose curves to.  For electrons this is typically 1</p></li>
+<li><p><strong>n_value</strong> (<em>float</em>) – Empirically determined fitting parameter to collapse displacement damage dose curves that do not collapse. It is 1 for protons</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of 2d numpy arrays where each element in the list represents one particle energy and and each array in the list is composed of three columns where column 1 is the particle energy, column 2 is the fluence, and column 3 is the remaining factor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.get_energy_vs_ddd">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">get_energy_vs_ddd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_to_normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.get_energy_vs_ddd" title="Permalink to this definition"></a></dt>
+<dd><p>Takes a give particle spectrum for an environment and calculates the displacement damage dose for that environment using the non-ionizing energy loss curve.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_spectrum</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the particle energy and column 1 is the partcle fluence</p></li>
+<li><p><strong>NIEL</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the particle energy and column 1 is the non-ionizing energy loss</p></li>
+<li><p><strong>energy_to_normalize</strong> (<em>float</em>) – The energy to relate all displacement damage dose curves to.  For electrons this is typically 1</p></li>
+<li><p><strong>n_value</strong> (<em>float</em>) – Empirically determined fitting parameter to collapse displacement damage dose curves that do not collapse. It is 1 for protons</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d numpy array where column 0 is the particle energy and column 1 is the displacement damage dose.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.interpolateNIELvsTd">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">interpolateNIELvsTd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">newTd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIELs_vs_Td</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_energies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.interpolateNIELvsTd" title="Permalink to this definition"></a></dt>
+<dd><p>By using 2d interpolation of a table of NIEL values for various Tds, this function will return a NIEL curve at a specific Td using 2d linear interpolation.  The appropriate method would simple be to caluculate the NIEL curve instead of doing linear interpolation. This funtion will be replaced with the calculation in the future</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>newTd</strong> (<em>float</em>) – Threshold displacement energy to derive a new non-ionizing energy loss curve</p></li>
+<li><p><strong>NIELs_vs_Td</strong> (<em>ndarray</em>) – 2d numpy array of NIEL values only where the x values or colums are the threshold displacement energies used to calculate the NIEL curves and the y values or rows are the particle energies of the NIEL curves</p></li>
+<li><p><strong>Tds</strong> (<em>ndarray</em>) – 1d numpy array of the threshold displacement energies of the NIEL values in the NIELs_vs_Td data set</p></li>
+<li><p><strong>particle_energies</strong> (<em>ndarray</em>) – 1d numpy array of the particle energies of the NIEL values in the NEIL_vs_Td data set</p></li>
+<li><p><strong>kind</strong> (<em>str</em>) – The type if interpolation to use. The default is ‘linear”.  Refer to documentation on scipy interp2d for other interpolation methods</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d numpy arrary where column 0 is the particle energy and column 1 is the NIEL curve using the user defined threshold displacement energy</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="solarpy.ddd.ddd_degradation_functions.lookupNIELValue">
+<span class="sig-prename descclassname"><span class="pre">solarpy.ddd.ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">lookupNIELValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIEL</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.ddd.ddd_degradation_functions.lookupNIELValue" title="Permalink to this definition"></a></dt>
+<dd><p>Finds a NIEL for a given particle energy.  Basically interpolates the data to find the NIEL</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particle_energy</strong> – particle energy you want the NIEL value for</p></li>
+<li><p><strong>NIEL</strong> (<em>ndarray</em>) – the 2D numpy array of particle energy vs NIEL</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>NIEL value at the chosen particle energy</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="example-class">
 <h1>Example Class<a class="headerlink" href="#example-class" title="Permalink to this heading"></a></h1>
 <p>Several classes built with the library to simplify use.</p>
-<span class="target" id="module-solarpy.eqflux_aero"></span><p>Class that derives all EQFLUX parameters for a solar cell including, the RDC of electrons, protons as well as the remaining factor.  If giving the environment spectrum the remaining factor of the solar cell can be calculated.</p>
+<span class="target" id="module-solarpy.examples.eqflux_aero"></span><dl class="py class">
+<dt class="sig sig-object py" id="solarpy.examples.eqflux_aero.eqflux_aero">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">solarpy.examples.eqflux_aero.</span></span><span class="sig-name descname"><span class="pre">eqflux_aero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">electron_qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proton_qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">electron_differential_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proton_differential_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">electron_reference_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proton_reference_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">critical_remaining_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">density_of_shield</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_thickness_cm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proton_shield_range_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">electron_shield_range_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_range_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_displacement_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_thickness_cm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">electron_energy_vs_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proton_energy_vs_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proton_to_electron_conversion_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.examples.eqflux_aero.eqflux_aero" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class that derives all EQFLUX parameters for a solar cell including, the RDC of electrons, protons as well as the remaining factor.  If giving the environment spectrum the remaining factor of the solar cell can be calculated.</p>
 <dl class="field-list simple">
-<dt class="field-odd">param electron_qual_data<span class="colon">:</span></dt>
-<dd class="field-odd"><p>[description]</p>
-</dd>
-<dt class="field-even">type electron_qual_data<span class="colon">:</span></dt>
-<dd class="field-even"><p>ndarray</p>
-</dd>
-<dt class="field-odd">param proton_qual_data<span class="colon">:</span></dt>
-<dd class="field-odd"><p>[description]</p>
-</dd>
-<dt class="field-even">type proton_qual_data<span class="colon">:</span></dt>
-<dd class="field-even"><p>ndarray</p>
-</dd>
-<dt class="field-odd">param electron_differential_spectrum<span class="colon">:</span></dt>
-<dd class="field-odd"><p>[description]</p>
-</dd>
-<dt class="field-even">type electron_differential_spectrum<span class="colon">:</span></dt>
-<dd class="field-even"><p>ndarray</p>
-</dd>
-<dt class="field-odd">param proton_differential_spectrum<span class="colon">:</span></dt>
-<dd class="field-odd"><p>[description]</p>
-</dd>
-<dt class="field-even">type proton_differential_spectrum<span class="colon">:</span></dt>
-<dd class="field-even"><p>ndarray</p>
-</dd>
-<dt class="field-odd">param electron_reference_energy<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Defaults to None. [description]</p>
-</dd>
-<dt class="field-even">type electron_reference_energy<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-<dt class="field-odd">param proton_reference_energy<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Defaults to None. [description]</p>
-</dd>
-<dt class="field-even">type proton_reference_energy<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-<dt class="field-odd">param fit_type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Defaults to None. [description]</p>
-</dd>
-<dt class="field-even">type fit_type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-<dt class="field-odd">param critical_remaining_factor<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Defaults to None. [description]</p>
-</dd>
-<dt class="field-even">type critical_remaining_factor<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-<dt class="field-odd">param density_of_shield<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Defaults to None. [description]</p>
-</dd>
-<dt class="field-even">type density_of_shield<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-<dt class="field-odd">param shield_thickness_cm<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Defaults to None. [description]</p>
-</dd>
-<dt class="field-even">type shield_thickness_cm<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-<dt class="field-odd">param proton_shield_range_table<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Defaults to None. [description]</p>
-</dd>
-<dt class="field-even">type proton_shield_range_table<span class="colon">:</span></dt>
-<dd class="field-even"><p>ndarray</p>
-</dd>
-<dt class="field-odd">param electron_shield_range_table<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Defaults to None. [description]</p>
-</dd>
-<dt class="field-even">type electron_shield_range_table<span class="colon">:</span></dt>
-<dd class="field-even"><p>ndarray</p>
-</dd>
-<dt class="field-odd">param solar_cell_range_table<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Defaults to None. [description]</p>
-</dd>
-<dt class="field-even">type solar_cell_range_table<span class="colon">:</span></dt>
-<dd class="field-even"><p>ndarray</p>
-</dd>
-<dt class="field-odd">param solar_cell_displacement_table<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Defaults to None. [description]</p>
-</dd>
-<dt class="field-even">type solar_cell_displacement_table<span class="colon">:</span></dt>
-<dd class="field-even"><p>ndarray</p>
-</dd>
-<dt class="field-odd">param solar_cell_thickness_cm<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Defaults to None. [description]</p>
-</dd>
-<dt class="field-even">type solar_cell_thickness_cm<span class="colon">:</span></dt>
-<dd class="field-even"><p>ndarray</p>
-</dd>
-<dt class="field-odd">param electron_energy_vs_rdc<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Defaults to None. [description]</p>
-</dd>
-<dt class="field-even">type electron_energy_vs_rdc<span class="colon">:</span></dt>
-<dd class="field-even"><p>ndarray</p>
-</dd>
-<dt class="field-odd">param proton_energy_vs_rdc<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Defaults to None. [description]</p>
-</dd>
-<dt class="field-even">type proton_energy_vs_rdc<span class="colon">:</span></dt>
-<dd class="field-even"><p>ndarrayl</p>
-</dd>
-<dt class="field-odd">param proton_to_electron_conversion_factor<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Defaults to None. [description]</p>
-</dd>
-<dt class="field-even">type proton_to_electron_conversion_factor<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>electron_qual_data</strong> (<em>ndarray</em>) – [description]</p></li>
+<li><p><strong>proton_qual_data</strong> (<em>ndarray</em>) – [description]</p></li>
+<li><p><strong>electron_differential_spectrum</strong> (<em>ndarray</em>) – [description]</p></li>
+<li><p><strong>proton_differential_spectrum</strong> (<em>ndarray</em>) – [description]</p></li>
+<li><p><strong>electron_reference_energy</strong> (<em>float</em>) – Defaults to None. [description]</p></li>
+<li><p><strong>proton_reference_energy</strong> (<em>float</em>) – Defaults to None. [description]</p></li>
+<li><p><strong>fit_type</strong> (<em>str</em>) – Defaults to None. [description]</p></li>
+<li><p><strong>critical_remaining_factor</strong> (<em>float</em>) – Defaults to None. [description]</p></li>
+<li><p><strong>density_of_shield</strong> (<em>float</em>) – Defaults to None. [description]</p></li>
+<li><p><strong>shield_thickness_cm</strong> (<em>float</em>) – Defaults to None. [description]</p></li>
+<li><p><strong>proton_shield_range_table</strong> (<em>ndarray</em>) – Defaults to None. [description]</p></li>
+<li><p><strong>electron_shield_range_table</strong> (<em>ndarray</em>) – Defaults to None. [description]</p></li>
+<li><p><strong>solar_cell_range_table</strong> (<em>ndarray</em>) – Defaults to None. [description]</p></li>
+<li><p><strong>solar_cell_displacement_table</strong> (<em>ndarray</em>) – Defaults to None. [description]</p></li>
+<li><p><strong>solar_cell_thickness_cm</strong> (<em>ndarray</em>) – Defaults to None. [description]</p></li>
+<li><p><strong>electron_energy_vs_rdc</strong> (<em>ndarray</em>) – Defaults to None. [description]</p></li>
+<li><p><strong>proton_energy_vs_rdc</strong> (<em>ndarrayl</em>) – Defaults to None. [description]</p></li>
+<li><p><strong>proton_to_electron_conversion_factor</strong> (<em>float</em>) – Defaults to None. [description]</p></li>
+</ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.examples.eqflux_aero.eqflux_aero.adjust_electron_rdc_fit_type">
+<span class="sig-name descname"><span class="pre">adjust_electron_rdc_fit_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.examples.eqflux_aero.eqflux_aero.adjust_electron_rdc_fit_type" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.examples.eqflux_aero.eqflux_aero.get_proton_to_electron_factor">
+<span class="sig-name descname"><span class="pre">get_proton_to_electron_factor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.examples.eqflux_aero.eqflux_aero.get_proton_to_electron_factor" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.examples.eqflux_aero.eqflux_aero.get_r2">
+<span class="sig-name descname"><span class="pre">get_r2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.examples.eqflux_aero.eqflux_aero.get_r2" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.examples.eqflux_aero.eqflux_aero.reference_particle_fit">
+<span class="sig-name descname"><span class="pre">reference_particle_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.examples.eqflux_aero.eqflux_aero.reference_particle_fit" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.examples.eqflux_aero.eqflux_aero.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.examples.eqflux_aero.eqflux_aero.update" title="Permalink to this definition"></a></dt>
+<dd><p>Updates member variables</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="solarpy.examples.eqflux_aero.eqflux_aero.update_rdc">
+<span class="sig-name descname"><span class="pre">update_rdc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#solarpy.examples.eqflux_aero.eqflux_aero.update_rdc" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 
 
