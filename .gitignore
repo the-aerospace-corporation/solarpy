@@ -3,4 +3,3 @@
 *.pyc
 solarpy.egg-info/
 .dist
-build
