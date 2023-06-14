@@ -21,7 +21,7 @@ python 3.10
 
 ### solarpy DOCUMENTATION
 
-
+Docs can be found here: <a href = "https://the-aerospace-corporation.github.io/solarpy/" target="_blank">Solarpy Docs.</a>
 ```
 numpy
 scipy
