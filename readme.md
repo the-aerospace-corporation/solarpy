@@ -25,7 +25,7 @@ python 3.10
 ```
 numpy
 scipy
-pandas
+pandasgit
 matplotlib
 julian
 profilehooks
