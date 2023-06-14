@@ -1,89 +1,47 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>EQFLUX &mdash; solarpy 0.1 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Welcome to solarpy’s documentation!" href="index.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="index.html" class="icon icon-home"> solarpy
           
-
-          
+          <a href="index.html" class="icon icon-home">
+            solarpy
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">EQFLUX</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#degradation-equations">degradation_equations</a></li>
@@ -94,180 +52,139 @@
 <li class="toctree-l1"><a class="reference internal" href="#example-class">Example Class</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">solarpy</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-      <li>EQFLUX</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">EQFLUX</li>
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="_sources/code.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="eqflux">
-<h1>EQFLUX<a class="headerlink" href="#eqflux" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="eqflux">
+<h1>EQFLUX<a class="headerlink" href="#eqflux" title="Permalink to this heading"></a></h1>
 <p>This code is taken almost line for line from the JPL GaAs Solar Cell Radiation Handbook.  The handbook publishes the FORTRAN code for EQGAFLUX.  EQGAFLUX takes RDC data, glass range tables for protons and electrons, GaAs stopping table, and an input space environment particle spectrum to determine the 1 MeV equivalent electron fluence.  This module takes that original FORTRAN code and replicates it line for line in python code.</p>
 <span class="target" id="module-EQFLUX"></span><dl class="py function">
-<dt id="EQFLUX.compute_equivalent_fluence_for_electrons">
-<code class="sig-prename descclassname">EQFLUX.</code><code class="sig-name descname">compute_equivalent_fluence_for_electrons</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">relative_damage_coefficients_electrons</span></em>, <em class="sig-param"><span class="n">electron_integral_particle_spectrum</span></em>, <em class="sig-param"><span class="n">nstep</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EQFLUX.compute_equivalent_fluence_for_electrons" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="EQFLUX.compute_equivalent_fluence_for_electrons">
+<span class="sig-prename descclassname"><span class="pre">EQFLUX.</span></span><span class="sig-name descname"><span class="pre">compute_equivalent_fluence_for_electrons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_damage_coefficients_electrons</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">electron_integral_particle_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EQFLUX.compute_equivalent_fluence_for_electrons" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the total 1 MeV electron fluence for a given integral electron particle spectrum and relative damage coefficients.  The function is almost a line for line translation of the JPL EQGAFLUX FORTRAN program in the GaAs Solar Cell Radiation Handbook</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>relative_damage_coefficients_electrons</strong> (<em>ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the relative damage coefficients for electrons</p></li>
 <li><p><strong>electron_integral_particle_spectrum</strong> (<em>ndarray</em>) – 2d array of the integral electron particle spectrum where column 0 is the electron particle energy and column 1 is the integral fluence.  The integral particle spectrum is typically obtained using radiation enviroment models such as Ae8/Ap8 and Ae9/Ap9</p></li>
 <li><p><strong>nstep</strong> (<em>int</em>) – The integration fineness and is typically 2</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Total 1 MeV electron fluence</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="EQFLUX.compute_equivalent_fluence_for_protons">
-<code class="sig-prename descclassname">EQFLUX.</code><code class="sig-name descname">compute_equivalent_fluence_for_protons</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">relative_damage_coefficients_protons</span></em>, <em class="sig-param"><span class="n">proton_integral_particle_spectrum</span></em>, <em class="sig-param"><span class="n">nstep</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EQFLUX.compute_equivalent_fluence_for_protons" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="EQFLUX.compute_equivalent_fluence_for_protons">
+<span class="sig-prename descclassname"><span class="pre">EQFLUX.</span></span><span class="sig-name descname"><span class="pre">compute_equivalent_fluence_for_protons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_damage_coefficients_protons</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proton_integral_particle_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EQFLUX.compute_equivalent_fluence_for_protons" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the total 1 MeV electron fluence for a given integral electron particle spectrum and relative damage coefficients.  The function is almost a line for line translation of the JPL EQGAFLUX FORTRAN program in the GaAs Solar Cell Radiation Handbook</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>relative_damage_coefficients_protons</strong> (<em>ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the relative damage coefficients for protons</p></li>
 <li><p><strong>proton_integral_particle_spectrum</strong> (<em>ndarray</em>) – 2d array of the integral proton particle spectrum where column 0 is the proton particle energy and column 1 is the integral fluence.  The integral particle spectrum is typically obtained using radiation enviroment models such as Ae8/Ap8 and Ae9/Ap9</p></li>
 <li><p><strong>nstep</strong> (<em>int</em>) – The integration fineness and is typically 2</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Total 1 MeV electron fluence</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="EQFLUX.get_log_electron_integral_spectrum">
-<code class="sig-prename descclassname">EQFLUX.</code><code class="sig-name descname">get_log_electron_integral_spectrum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">electron_integral_particle_spectrum</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EQFLUX.get_log_electron_integral_spectrum" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="EQFLUX.get_log_electron_integral_spectrum">
+<span class="sig-prename descclassname"><span class="pre">EQFLUX.</span></span><span class="sig-name descname"><span class="pre">get_log_electron_integral_spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">electron_integral_particle_spectrum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EQFLUX.get_log_electron_integral_spectrum" title="Permalink to this definition"></a></dt>
 <dd><p>Generates the electron particle energy vs ln(fluence) spectrum of the integral particle spectrum in accordance with the JPL EQGAFLUX FORTRAN program as described in the GaAs Solar Cell Radiation Handbook</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>electron_integral_particle_spectrum</strong> (<em>ndarray</em>) – 2d array of the integral electron particle spectrum where column 0 is the electron particle energy and column 1 is the integral fluence.  The integral particle spectrum is typically obtained using radiation enviroment models such as Ae8/Ap8 and Ae9/Ap9</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>2d ndarray of the electron particle energy (column 0) vs ln(fluence) (column 1)</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="EQFLUX.get_loglog_proton_integral_spectrum">
-<code class="sig-prename descclassname">EQFLUX.</code><code class="sig-name descname">get_loglog_proton_integral_spectrum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">proton_integral_particle_spectrum</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EQFLUX.get_loglog_proton_integral_spectrum" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="EQFLUX.get_loglog_proton_integral_spectrum">
+<span class="sig-prename descclassname"><span class="pre">EQFLUX.</span></span><span class="sig-name descname"><span class="pre">get_loglog_proton_integral_spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proton_integral_particle_spectrum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EQFLUX.get_loglog_proton_integral_spectrum" title="Permalink to this definition"></a></dt>
 <dd><p>Generates the ln(proton particle energy) vs ln(fluence) spectrum of the integral particle spectrum in accordance with the JPL EQGAFLUX FORTRAN program as described in the GaAs Solar Cell Radiation Handbook</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>proton_integral_particle_spectrum</strong> (<em>ndarray</em>) – 2d array of the integral proton particle spectrum where column 0 is the proton particle energy and column 1 is the integral fluence.  The integral particle spectrum is typically obtained using radiation enviroment models such as Ae8/Ap8 and Ae9/Ap9</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>2d ndarray of the ln(proton particle energy) (column 0) vs ln(fluence) (column 1)</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="EQFLUX.get_loglog_rdc">
-<code class="sig-prename descclassname">EQFLUX.</code><code class="sig-name descname">get_loglog_rdc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">relative_damage_coefficients</span></em><span class="sig-paren">)</span><a class="headerlink" href="#EQFLUX.get_loglog_rdc" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="EQFLUX.get_loglog_rdc">
+<span class="sig-prename descclassname"><span class="pre">EQFLUX.</span></span><span class="sig-name descname"><span class="pre">get_loglog_rdc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_damage_coefficients</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EQFLUX.get_loglog_rdc" title="Permalink to this definition"></a></dt>
 <dd><p>Generates the ln(particle energy) vs ln(relative damage coefficient) spectrum for a give relative damage coefficient spectrum in accordance with the JPL EQGAFLUX FORTRAN program as described in the GaAs Solar Cell Radiation Handbook</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>relative_damage_coefficients</strong> (<em>ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the relative damage coefficients</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>2d ndarray of the ln(particle energy) (column 0) vs ln(relative damage coefficient) (column 1)</p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="degradation-equations">
-<h1>degradation_equations<a class="headerlink" href="#degradation-equations" title="Permalink to this headline">¶</a></h1>
+</section>
+<section id="degradation-equations">
+<h1>degradation_equations<a class="headerlink" href="#degradation-equations" title="Permalink to this heading"></a></h1>
 <p>A set of what is know as the degradation equation as described in the JPL Solar Cell and GaAs Solar Cell Handbook.  The equation is used to fit, interpolate, and extrapolate solar cell radiation degrdation data to generate relative damage coefficients as well as displacement damage dose curves.  These equations have been empirically determined to best approximate radiation degradation data, but they do not always fit well.  This is an active area to determine the best way to relate solar cell radiation degradation to fundamental physics that govern solar cell degradatio due to radiation</p>
 <span class="target" id="module-degradation_equations"></span><dl class="py function">
-<dt id="degradation_equations.degradation_equation">
-<code class="sig-prename descclassname">degradation_equations.</code><code class="sig-name descname">degradation_equation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fluence_ddd</span></em>, <em class="sig-param"><span class="n">C</span></em>, <em class="sig-param"><span class="n">phi_D_x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.degradation_equation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="degradation_equations.degradation_equation">
+<span class="sig-prename descclassname"><span class="pre">degradation_equations.</span></span><span class="sig-name descname"><span class="pre">degradation_equation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fluence_ddd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_D_x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.degradation_equation" title="Permalink to this definition"></a></dt>
 <dd><p>Degradation equation as defined by the Solar Cell and GaAs Solar Cell Radiation Handbooks (1 - C * np.log10(1 + (fluence / phi_x))). The same equation is used for displacement damage dose curves</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fluence_ddd</strong> (<em>ndarray</em>) – 1d numpy array of fluences or displacement damage dose</p></li>
 <li><p><strong>C</strong> (<em>float</em>) – Constant that is determined through fitting</p></li>
 <li><p><strong>phi_D_x</strong> (<em>float</em>) – Fluence or displacement damage dose constant that is determined through fitting</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1d array of calculated remaining factors</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="degradation_equations.degradation_equation_rf_greater_than_one">
-<code class="sig-prename descclassname">degradation_equations.</code><code class="sig-name descname">degradation_equation_rf_greater_than_one</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fluence_ddd</span></em>, <em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">C</span></em>, <em class="sig-param"><span class="n">phi_D_x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.degradation_equation_rf_greater_than_one" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="degradation_equations.degradation_equation_rf_greater_than_one">
+<span class="sig-prename descclassname"><span class="pre">degradation_equations.</span></span><span class="sig-name descname"><span class="pre">degradation_equation_rf_greater_than_one</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fluence_ddd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_D_x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.degradation_equation_rf_greater_than_one" title="Permalink to this definition"></a></dt>
 <dd><p>Degradation equation for determining remaining factor as a function of displacement damage dose.  The 1 in the degradation equation is replaced with a fitting parameter (A) to account for values above one.  This should not be used because it assumes that the remaining factors can be greater than beginning of life. It is in included as a reference to previous literature.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fluence_ddd</strong> (<em>ndarray</em>) – 1d numpy array of fluences or displacement damage dose</p></li>
 <li><p><strong>A</strong> (<em>float</em>) – Constant that is determined from fitting to account for remaining factors greater than 1</p></li>
@@ -275,18 +192,18 @@
 <li><p><strong>phi_D_x</strong> (<em>float</em>) – Fluence or displacement damage dose constant that is determined through fitting</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1d array of calculated remaining factors</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="degradation_equations.double_degradation_equation">
-<code class="sig-prename descclassname">degradation_equations.</code><code class="sig-name descname">double_degradation_equation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fluence_ddd</span></em>, <em class="sig-param"><span class="n">C1</span></em>, <em class="sig-param"><span class="n">phi_D_x1</span></em>, <em class="sig-param"><span class="n">C2</span></em>, <em class="sig-param"><span class="n">phi_D_x2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.double_degradation_equation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="degradation_equations.double_degradation_equation">
+<span class="sig-prename descclassname"><span class="pre">degradation_equations.</span></span><span class="sig-name descname"><span class="pre">double_degradation_equation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fluence_ddd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_D_x1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_D_x2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.double_degradation_equation" title="Permalink to this definition"></a></dt>
 <dd><p>Combines two of the single degradation equation (1 - (C1 * np.log10(1 + (fluence / phi_x1))) - (C2 * np.log10(1 + (fluence / phi_x2)))) in an effort to alleviate the assumption that there are two components degrading.  Can fit more complex solar cell degradation better, but may not always be the aright approach as as it is an assumption that there are two mechanisms behaving similarly</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fluence_ddd</strong> (<em>ndarray</em>) – 1d numpy array of fluences or displacement damage dose</p></li>
 <li><p><strong>C1</strong> (<em>float</em>) – Constant that is determined through fitting for first degradation equation</p></li>
@@ -295,18 +212,18 @@
 <li><p><strong>phi_D_x2</strong> (<em>float</em>) – Fluence or displacement damage dose constant that is determined through fitting</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1d array of calculated remaining factors</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="degradation_equations.double_degradation_equation_rf_greater_than_one">
-<code class="sig-prename descclassname">degradation_equations.</code><code class="sig-name descname">double_degradation_equation_rf_greater_than_one</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fluence_ddd</span></em>, <em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">C1</span></em>, <em class="sig-param"><span class="n">phi_D_x1</span></em>, <em class="sig-param"><span class="n">C2</span></em>, <em class="sig-param"><span class="n">phi_D_x2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.double_degradation_equation_rf_greater_than_one" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="degradation_equations.double_degradation_equation_rf_greater_than_one">
+<span class="sig-prename descclassname"><span class="pre">degradation_equations.</span></span><span class="sig-name descname"><span class="pre">double_degradation_equation_rf_greater_than_one</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fluence_ddd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_D_x1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_D_x2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.double_degradation_equation_rf_greater_than_one" title="Permalink to this definition"></a></dt>
 <dd><p>Combines two of the single degradation equation (A - (C1 * np.log10(1 + (fluence / phi_x1))) - (C2 * np.log10(1 + (fluence / phi_x2)))) in an effort to alleviate the assumption that there are two components degrading.  Can fit more complex solar cell degradation better, but may not always be the aright approach as as it is an assumption that there are two mechanisms behaving similarly</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fluence_ddd</strong> (<em>ndarray</em>) – 1d numpy array of fluences or displacement damage dose</p></li>
 <li><p><strong>C1</strong> (<em>float</em>) – Constant that is determined through fitting for first degradation equation</p></li>
@@ -315,115 +232,115 @@
 <li><p><strong>phi_D_x2</strong> (<em>float</em>) – Fluence or displacement damage dose constant that is determined through fitting</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1d array of calculated remaining factors</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="degradation_equations.fit_degradation_equation">
-<code class="sig-prename descclassname">degradation_equations.</code><code class="sig-name descname">fit_degradation_equation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fluence_or_ddd_vs_remaining_factor</span></em>, <em class="sig-param"><span class="n">parameters</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.fit_degradation_equation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="degradation_equations.fit_degradation_equation">
+<span class="sig-prename descclassname"><span class="pre">degradation_equations.</span></span><span class="sig-name descname"><span class="pre">fit_degradation_equation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fluence_or_ddd_vs_remaining_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.fit_degradation_equation" title="Permalink to this definition"></a></dt>
 <dd><p>Given the displacement damage dose or fluence vs remaining factor, the data is fit using the Nelder-Mead method to arrive at the best fit for C and phi_D_x for the degradation equation.  The data is fit by minimizing the error function to the root mean squared error (RMSE).  This is done because it gives lower chi squared values and r squared values closer to 1.  Also, you can be pretty far off on your starting parameters and still arrive at a good fit.  RMSE allows for better fits as there is usually error in the fluence and remaining factors.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fluence_or_ddd_vs_remaining_factor</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the displacement damage dose or fluence and column 1 is the remaining factor:</p></li>
 <li><p><strong>parameters</strong> (<em>ndarray</em>) – 1d numpy array of starting values for the fit. The array should be 2 elements where the first element is the C parameter in the degradation equation and phi_D_x is the second parameter. If no parameters are entered the fit defaults to using 2e-2 for C and 2e8 for phi_D_x.  These parameters are found to fit most data without any modification</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1d numpy array of 2 elements where the first element is the C parameter and the second is phi_D_x</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="degradation_equations.fit_degradation_equation_leastsquare">
-<code class="sig-prename descclassname">degradation_equations.</code><code class="sig-name descname">fit_degradation_equation_leastsquare</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fluence_or_ddd_vs_remaining_factor</span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.fit_degradation_equation_leastsquare" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="degradation_equations.fit_degradation_equation_leastsquare">
+<span class="sig-prename descclassname"><span class="pre">degradation_equations.</span></span><span class="sig-name descname"><span class="pre">fit_degradation_equation_leastsquare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fluence_or_ddd_vs_remaining_factor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.fit_degradation_equation_leastsquare" title="Permalink to this definition"></a></dt>
 <dd><p>Given the displacement damage dose or fluence vs remaining factor, the data is fit using the sum of least squares to arrive at the best fit for C and D_x for the DDD degradation equation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>fluence_or_ddd_vs_remaining_factor</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the displacement damage dose or fluence and column 1 is the remaining factor:</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1d numpy array of 2 elements where the first element is the C parameter and the second is phi_D_x</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="degradation_equations.fit_degradation_equation_rf_greater_than_1">
-<code class="sig-prename descclassname">degradation_equations.</code><code class="sig-name descname">fit_degradation_equation_rf_greater_than_1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fluence_or_ddd_vs_remaining_factor</span></em>, <em class="sig-param"><span class="n">parameters</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.fit_degradation_equation_rf_greater_than_1" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="degradation_equations.fit_degradation_equation_rf_greater_than_1">
+<span class="sig-prename descclassname"><span class="pre">degradation_equations.</span></span><span class="sig-name descname"><span class="pre">fit_degradation_equation_rf_greater_than_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fluence_or_ddd_vs_remaining_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.fit_degradation_equation_rf_greater_than_1" title="Permalink to this definition"></a></dt>
 <dd><p>Given the displacement damage dose or fluence vs remaining factor, the data is fit using the Nelder-Mead method to arrive at the best fit for A, C, and phi_D_x for the DDD double degradation equation.  The form of the degradation equation used for the fit replaces the 1 with the fitting parameter A.  This is done for data that has a remaining factor above 1 after radiation.  We do not recommend this method as a remaining factor above indicates a measurement or calibration error.  It does however provide a way to fit otherwise unfittable data.  The data is fit by minimizing the error function to the root mean squared error (RMSE).  This is done becuase it gives lower chi squared values and r squared values closer to 1.  Also, you can be pretty far off on your starting parameters and still arrive at a good fit.  RMSE allows for better fits as there is usually error in the fluence and remaining factor and provides the best fit to expected values</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fluence_or_ddd_vs_remaining_factor</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the displacement damage dose or fluence and column 1 is the remaining factor:</p></li>
 <li><p><strong>parameters</strong> (<em>ndarray</em>) – 1d numpy array of starting values for the fit. The array should be 3 elements where the first element is the A parameter in the degradation equation, C is the second parameter, and D_x is the third paramter. If no parameters are entered the fit defaults to using 0.9, 2e-1, 2e10 for A, C, and phi_D_x respectively.  These parameters are found to fit most data without any modification</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1d numpy array of 3 elements where the first element is the A parameter, the second is C, and the third parameter is D_x.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="degradation_equations.fit_double_degradation_eq_leastsquare">
-<code class="sig-prename descclassname">degradation_equations.</code><code class="sig-name descname">fit_double_degradation_eq_leastsquare</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fluence_or_ddd_vs_remaining_factor</span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.fit_double_degradation_eq_leastsquare" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="degradation_equations.fit_double_degradation_eq_leastsquare">
+<span class="sig-prename descclassname"><span class="pre">degradation_equations.</span></span><span class="sig-name descname"><span class="pre">fit_double_degradation_eq_leastsquare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fluence_or_ddd_vs_remaining_factor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.fit_double_degradation_eq_leastsquare" title="Permalink to this definition"></a></dt>
 <dd><p>Given the displacement damage dose curve and minimizing using sum of least squares to arrive at the best fit for C1, D_x1, C2, D_x2 for the DDD double degradation equation.  The data is fit by minimizing the error function to the root mean squared error (RMSE).  This is done becuase it gives lower chi squared values and r squared values closer to 1.  Also, you can be pretty far off on your starting parameters and still arrive at a good fit.  RMSE allows for better fits as there is usually error in the fluence and remaining factor and provides the best fit to expected values</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>fluence_or_ddd_vs_remaining_factor</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the displacement damage dose and column 1 is the remaining factor.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1d numpy array of 2 elements where the first element is the C1 parameter in the degradation equation, D_x1 is the second parameter, C2 is the third parameter, and D_x2 is the last paramenter.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="degradation_equations.fit_double_degradation_equation">
-<code class="sig-prename descclassname">degradation_equations.</code><code class="sig-name descname">fit_double_degradation_equation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fluence_or_ddd_vs_remaining_factor</span></em>, <em class="sig-param"><span class="n">parameters</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.fit_double_degradation_equation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="degradation_equations.fit_double_degradation_equation">
+<span class="sig-prename descclassname"><span class="pre">degradation_equations.</span></span><span class="sig-name descname"><span class="pre">fit_double_degradation_equation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fluence_or_ddd_vs_remaining_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.fit_double_degradation_equation" title="Permalink to this definition"></a></dt>
 <dd><p>Given the displacement damage dose or fluence vs remaining factor, the data is fit using the Nelder-Mead method to arrive at the best fit for C1, phi_D_x1, C2, phi_D_x2 for the double degradation equation.  The data is fit by minimizing the error function to the root mean squared error (RMSE).  This is done becuase it gives lower chi squared values and r squared values closer to 1.  Also, you can be pretty far off on your starting parameters and still arrive at a good fit.  RMSE allows for better fits as there is usually error in the fluence and remaining factor and provides the best fit to expected values.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fluence_or_ddd_vs_remaining_factor</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the displacement damage dose or fluence and column 1 is the remaining factor:</p></li>
 <li><p><strong>parameters</strong> (<em>ndarray</em>) – 1d numpy array of starting values for the fit. The array should be 4 elements where the first element is the C1 parameter in the degradation equation, D_x1 is the second parameter, C2 is the third parameter, and D_x2 is the last parameter.  If no parameters are entered the fit defaults to using 6e-2, 6e8, 2e-4, 4e-10 for C1, D_x1, C2, and D_x2 respectively.  These parameters are found to fit most data without any modification</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1d numpy array of 4 elements where the first element is the C1 parameter in the degradation equation, phi_D_x1 is the second parameter, C2 is the third parameter, and phi_D_x2 is the last parameter.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="degradation_equations.get_fluence">
-<code class="sig-prename descclassname">degradation_equations.</code><code class="sig-name descname">get_fluence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">remaining_factor</span></em>, <em class="sig-param"><span class="n">C</span></em>, <em class="sig-param"><span class="n">phi_D_x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.get_fluence" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="degradation_equations.get_fluence">
+<span class="sig-prename descclassname"><span class="pre">degradation_equations.</span></span><span class="sig-name descname"><span class="pre">get_fluence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remaining_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_D_x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.get_fluence" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the fluence or displacement damage dose using the degradation equation</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>remaining_factor</strong> (<em>ndarray</em><em> or </em><em>float</em>) – 1d numpy array or float of the remaining factor</p></li>
 <li><p><strong>C</strong> (<em>float</em>) – Constant that is determined through fitting</p></li>
 <li><p><strong>phi_D_x</strong> (<em>float</em>) – Fluence or displacement damage dose constant that is determined through fitting</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1d numpy array or float of the fluence or displacement damage dose that the remaining factor is located at</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="degradation_equations.get_fluence_ddd_double_degradation">
-<code class="sig-prename descclassname">degradation_equations.</code><code class="sig-name descname">get_fluence_ddd_double_degradation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">remaining_factor</span></em>, <em class="sig-param"><span class="n">C1</span></em>, <em class="sig-param"><span class="n">phi_D_x1</span></em>, <em class="sig-param"><span class="n">C2</span></em>, <em class="sig-param"><span class="n">phi_D_x2</span></em>, <em class="sig-param"><span class="n">x0</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.get_fluence_ddd_double_degradation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="degradation_equations.get_fluence_ddd_double_degradation">
+<span class="sig-prename descclassname"><span class="pre">degradation_equations.</span></span><span class="sig-name descname"><span class="pre">get_fluence_ddd_double_degradation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remaining_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_D_x1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_D_x2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.get_fluence_ddd_double_degradation" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the fluence or displacement damage dose using the double degradation equation</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>remaining_factor</strong> (<em>ndarray</em><em> or </em><em>float</em>) – 1d numpy array or float of the remaining factor</p></li>
 <li><p><strong>C1</strong> (<em>float</em>) – Constant that is determined through fitting for first degradation equation</p></li>
@@ -433,75 +350,84 @@
 <li><p><strong>x0</strong> (<em>float</em>) – Best guess at the fluence or displacement damage does that the remaining factor should be near</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1d numpy array or float of the fluence or displacement damage dose that the remaining factor is located at</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="degradation_equations.get_fluence_ddd_poly">
-<code class="sig-prename descclassname">degradation_equations.</code><code class="sig-name descname">get_fluence_ddd_poly</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">remaining_factor</span></em>, <em class="sig-param"><span class="n">fit</span></em>, <em class="sig-param"><span class="n">x0</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.get_fluence_ddd_poly" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="degradation_equations.get_fluence_ddd_poly">
+<span class="sig-prename descclassname"><span class="pre">degradation_equations.</span></span><span class="sig-name descname"><span class="pre">get_fluence_ddd_poly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remaining_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.get_fluence_ddd_poly" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the fluence or displacement damage dose using a polynomial fit for a given remaining factor</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>remaining_factor</strong> (<em>ndarray</em><em> or </em><em>float</em>) – 1d numpy array or float of the remaining factor</p></li>
 <li><p><strong>fit</strong> (<em>ndarray</em>) – The polynomial coefficients</p></li>
 <li><p><strong>x0</strong> (<em>float</em>) – Best guess at the fluence or displacement damage does that the remaining factor should be near</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1d numpy array or float of the fluence or displacement damage dose that the remaining factor is located at</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="degradation_equations.get_remaining_factor_poly">
-<code class="sig-prename descclassname">degradation_equations.</code><code class="sig-name descname">get_remaining_factor_poly</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fluence_ddd</span></em>, <em class="sig-param"><span class="n">fit</span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.get_remaining_factor_poly" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="degradation_equations.get_remaining_factor_poly">
+<span class="sig-prename descclassname"><span class="pre">degradation_equations.</span></span><span class="sig-name descname"><span class="pre">get_remaining_factor_poly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fluence_ddd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.get_remaining_factor_poly" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the remaining factor from a polynomial fit of the displacement damage dose or fluence.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fluence_ddd</strong> (<em>ndarray</em>) – 1d numpy array of fluences or displacement damage dose</p></li>
 <li><p><strong>fit</strong> (<em>ndarray</em>) – The polynomial coefficients</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1d numpy array or float of the remaining factor at a given fluence or displacement damage dose</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="degradation_equations.polynomialFit">
-<code class="sig-prename descclassname">degradation_equations.</code><code class="sig-name descname">polynomialFit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fluence_or_ddd_vs_remaining_factor</span></em>, <em class="sig-param"><span class="n">degree</span><span class="o">=</span><span class="default_value">5</span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.polynomialFit" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="degradation_equations.group_by">
+<span class="sig-prename descclassname"><span class="pre">degradation_equations.</span></span><span class="sig-name descname"><span class="pre">group_by</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_by_column_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.group_by" title="Permalink to this definition"></a></dt>
+<dd><p>Groups data by a column index
+:param data ():
+:param group_by_column_index ():</p>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="degradation_equations.polynomialFit">
+<span class="sig-prename descclassname"><span class="pre">degradation_equations.</span></span><span class="sig-name descname"><span class="pre">polynomialFit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fluence_or_ddd_vs_remaining_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#degradation_equations.polynomialFit" title="Permalink to this definition"></a></dt>
 <dd><p>Given the displacement damage dose or fluence vs remaining factor, the data is fit using a polynomial to arrive at the best fit for C and D_x for the DDD degradation equation.  Wrapper function of numpy’s polyfit.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fluence_or_ddd_vs_remaining_factor</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the displacement damage dose or fluence and column 1 is the remaining factor:</p></li>
 <li><p><strong>degree</strong> (<em>int</em>) – Degree of fitting polynomial</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Polynomial coefficients, highest power first</p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="electron-rdc">
-<h1>electron_rdc<a class="headerlink" href="#electron-rdc" title="Permalink to this headline">¶</a></h1>
+</section>
+<section id="electron-rdc">
+<h1>electron_rdc<a class="headerlink" href="#electron-rdc" title="Permalink to this heading"></a></h1>
 <p>Relative damage coefficients (RDC) are used to relate the relative damage of one particle energy to another.  The JPL radiation handbooks relate all particle energies and types to a 1MeV electron equivalent fluence, hence the name JPL Equivalent Fluence of JPL EQFLUX method.  According the JPL Handbooks, 1 MeV electron was choose because it is readily available for ground testing and the abundance of 1 MeV electron particles in the space environment.</p>
 <p>Note:  This module and the proton module can be combined to one rdc module.  The modules are seperate to reflect the procedure used in the JPL radiation hand books.</p>
 <span class="target" id="module-electron_rdc"></span><dl class="py function">
-<dt id="electron_rdc.extrapolate_RDC">
-<code class="sig-prename descclassname">electron_rdc.</code><code class="sig-name descname">extrapolate_RDC</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">energy_vs_rdc</span></em>, <em class="sig-param"><span class="n">minimum_particle_energy</span></em>, <em class="sig-param"><span class="n">maximum_particle_energy</span></em>, <em class="sig-param"><span class="n">minimum_energy_rdc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_energy_rdc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">number_of_points</span><span class="o">=</span><span class="default_value">3000</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.extrapolate_RDC" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="electron_rdc.extrapolate_RDC">
+<span class="sig-prename descclassname"><span class="pre">electron_rdc.</span></span><span class="sig-name descname"><span class="pre">extrapolate_RDC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_vs_rdc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_energy_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_energy_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.extrapolate_RDC" title="Permalink to this definition"></a></dt>
 <dd><p>Linearly extrapolates AND interpolates the RDC data. This is a wrapper function of scipy interpolate using the ‘extrapolate” keyword argument. The user can use any function they wish to interpolate or extrapolate</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>energy_vs_rdc</strong> – 2d numpy array with column 0 being the particle energy and column 1 being the relative damage coefficienct</p></li>
 <li><p><strong>minimum_particle_energy</strong> – Minimum energy to start linear extrapolation of rdc data</p></li>
@@ -512,18 +438,18 @@
 <li><p><strong>more</strong> (<em>understand</em>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>2d numpy array or energy in column 0 and relative damage coefficients in column 2 that is extrapolated and interpolated for user defined arguments</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="electron_rdc.extrapolate_RDC_loglog">
-<code class="sig-prename descclassname">electron_rdc.</code><code class="sig-name descname">extrapolate_RDC_loglog</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">energy_vs_rdc</span></em>, <em class="sig-param"><span class="n">minimum_particle_energy</span></em>, <em class="sig-param"><span class="n">maximum_particle_energy</span></em>, <em class="sig-param"><span class="n">minimum_energy_rdc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maximum_energy_rdc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">number_of_points</span><span class="o">=</span><span class="default_value">3000</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.extrapolate_RDC_loglog" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="electron_rdc.extrapolate_RDC_loglog">
+<span class="sig-prename descclassname"><span class="pre">electron_rdc.</span></span><span class="sig-name descname"><span class="pre">extrapolate_RDC_loglog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_vs_rdc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_energy_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_energy_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.extrapolate_RDC_loglog" title="Permalink to this definition"></a></dt>
 <dd><p>Linearly extrapolates AND interpolates the loglog of RDC data. This is a wrapper function of scipy interpolate using the ‘extrapolate” keyword argument. The user can use any function they wish to interpolate or extrapolate</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>energy_vs_rdc</strong> – 2d numpy array with column 0 being the particle energy and column 1 being the relative damage coefficienct</p></li>
 <li><p><strong>minimum_particle_energy</strong> – Minimum energy to start linear extrapolation of rdc data</p></li>
@@ -534,18 +460,18 @@
 <li><p><strong>more</strong> (<em>understand</em>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>2d numpy array or energy in column 0 and relative damage coefficients in column 2 that is extrapolated and interpolated for user defined arguments</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="electron_rdc.get_energy_vs_rdc">
-<code class="sig-prename descclassname">electron_rdc.</code><code class="sig-name descname">get_energy_vs_rdc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">qual_data</span></em>, <em class="sig-param"><span class="n">critical_remaining_factor</span></em>, <em class="sig-param"><span class="n">energyToNormalizeRDC</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">fit_parameters</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">return_model</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.get_energy_vs_rdc" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="electron_rdc.get_energy_vs_rdc">
+<span class="sig-prename descclassname"><span class="pre">electron_rdc.</span></span><span class="sig-name descname"><span class="pre">get_energy_vs_rdc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">critical_remaining_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energyToNormalizeRDC</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.get_energy_vs_rdc" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the unidirectional RDC curve (energy vs RDC) given the radiation qual data, critical remaining factor, and the partcle energy you wish to relate the damage of each particel too. Uses the single degradation equation.  This is needed to calculate the fluence at which each the critical remaining factor is for each of the particle energy data sets</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>qual_data</strong> – 2d numpy array with three columns where column 0 is particle energy, column 1 is fluence, and column 2 is remaining factor</p></li>
 <li><p><strong>critical_remaining_factor</strong> – The remaining factor at which to relate all fluences</p></li>
@@ -553,18 +479,18 @@
 <li><p><strong>fit_parameters</strong> – 1d numpy array include 2 parameters, one for the fitting constant C and the other for phi_x.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>2d numpy array of the energy in column 0 and relative damage coefficient in column 1</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="electron_rdc.get_energy_vs_rdc_double_degradation">
-<code class="sig-prename descclassname">electron_rdc.</code><code class="sig-name descname">get_energy_vs_rdc_double_degradation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">qual_data</span></em>, <em class="sig-param"><span class="n">critical_remaining_factor</span></em>, <em class="sig-param"><span class="n">energyToNormalizeRDC</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">fit_parameters</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">return_model</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.get_energy_vs_rdc_double_degradation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="electron_rdc.get_energy_vs_rdc_double_degradation">
+<span class="sig-prename descclassname"><span class="pre">electron_rdc.</span></span><span class="sig-name descname"><span class="pre">get_energy_vs_rdc_double_degradation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">critical_remaining_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energyToNormalizeRDC</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.get_energy_vs_rdc_double_degradation" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the unidirectional RDC curve (energy vs RDC) given the radiation qual data, critical remaining factor, and the partcle energy you wish to relate the damage of each particel too. Uses double degradatin equation. This is needed to calculate the fluence at which each the critical remaining factor is for each of the particle energy data sets</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>qual_data</strong> – 2d numpy array with three columns where column 0 is particle energy, column 1 is fluence, and column 2 is remaining factor</p></li>
 <li><p><strong>critical_remaining_factor</strong> – The remaining factor at which to relate all fluences</p></li>
@@ -572,36 +498,36 @@
 <li><p><strong>fit_parameters</strong> – 1d numpy array of list of parameters includes 4 parameters, C_1 and phi_x_1 for the first degradation equation and C_2 and phi_x_2 for the second degradation equation</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>2d numpy array of the energy in column 0 and relative damage coefficient in column 1</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="electron_rdc.get_omnidirectional_electron_RDC_with_shielding">
-<code class="sig-prename descclassname">electron_rdc.</code><code class="sig-name descname">get_omnidirectional_electron_RDC_with_shielding</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">energy_vs_rdc</span></em>, <em class="sig-param"><span class="n">mass_thickness_of_shield</span></em>, <em class="sig-param"><span class="n">shield_range_table</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.get_omnidirectional_electron_RDC_with_shielding" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="electron_rdc.get_omnidirectional_electron_RDC_with_shielding">
+<span class="sig-prename descclassname"><span class="pre">electron_rdc.</span></span><span class="sig-name descname"><span class="pre">get_omnidirectional_electron_RDC_with_shielding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_vs_rdc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass_thickness_of_shield</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_range_table</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.get_omnidirectional_electron_RDC_with_shielding" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the omnidirectional relative damage coefficient of a solar cell after some shielding, typically solar cell cover glass.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>energy_vs_rdc</strong> – 2d numpy array with column 0 being the particle energy and column 1 being the relative damage coefficienct</p></li>
 <li><p><strong>mass_thickness_of_shield</strong> – Mass thickness of the shielding being used in units of g/cm.  Derived by multiplying the density of the shield by the thickness of the shield</p></li>
 <li><p><strong>shield_range_table</strong> – Stopping power and range table for the shield</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>2d numpy array of energy (column 0) and relative damage coefficients (column 2).  The relative damage coefficients are calculated after going through some shielded and adjusted from unidirectional test energies to omnidirectional test energies</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="electron_rdc.get_rdc_after_shielding">
-<code class="sig-prename descclassname">electron_rdc.</code><code class="sig-name descname">get_rdc_after_shielding</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">energy_vs_rdc</span></em>, <em class="sig-param"><span class="n">angles</span></em>, <em class="sig-param"><span class="n">mass_thickness_of_shield</span></em>, <em class="sig-param"><span class="n">shield_range_table</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.get_rdc_after_shielding" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="electron_rdc.get_rdc_after_shielding">
+<span class="sig-prename descclassname"><span class="pre">electron_rdc.</span></span><span class="sig-name descname"><span class="pre">get_rdc_after_shielding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_vs_rdc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass_thickness_of_shield</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_range_table</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.get_rdc_after_shielding" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the relative damage coefficient of unidirectional particles after some shielding.  The relative damage coefficienct is calculated for all angles of a particle after shielding over a hemisphere</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>energy_vs_rdc</strong> – 2d numpy array with column 0 being the particle energy and column 1 being the relative damage coefficient</p></li>
 <li><p><strong>angles</strong> – 1d numpy array of entry angles of particles. Typically over 180 degrees</p></li>
@@ -609,18 +535,18 @@
 <li><p><strong>shield_range_table</strong> – Stopping power and range table for the shield</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>List of 1d numpy array of relative damage coefficients for each angle of a hemisphere after a user defined shield</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="electron_rdc.get_shielded_particle_energies">
-<code class="sig-prename descclassname">electron_rdc.</code><code class="sig-name descname">get_shielded_particle_energies</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">particleEnergies</span></em>, <em class="sig-param"><span class="n">angles</span></em>, <em class="sig-param"><span class="n">mass_thickness_of_shield</span></em>, <em class="sig-param"><span class="n">shield_range_table</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.get_shielded_particle_energies" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the energy of a particle after it passes through shielding.  The energy of the of the particle is calculated for all angles over 180 degrees.</p>
+<dt class="sig sig-object py" id="electron_rdc.get_shielded_particle_energies">
+<span class="sig-prename descclassname"><span class="pre">electron_rdc.</span></span><span class="sig-name descname"><span class="pre">get_shielded_particle_energies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particleEnergies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass_thickness_of_shield</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_range_table</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.get_shielded_particle_energies" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the energy of a particle after it passes through shielding.  The energy of the particle is calculated for all angles over 180 degrees.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>particleEnergies</strong> – </p></li>
 <li><p><strong>angles</strong> – </p></li>
@@ -628,29 +554,47 @@
 <li><p><strong>shield_range_table</strong> – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>List of 1d numpy array of particle energies for each angle of a hemisphere after a user defined shield</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="electron_rdc.qual_data_from_file">
-<code class="sig-prename descclassname">electron_rdc.</code><code class="sig-name descname">qual_data_from_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rdc_txt_file</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.qual_data_from_file" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="electron_rdc.get_unidirectional_electron_RDC_with_shielding">
+<span class="sig-prename descclassname"><span class="pre">electron_rdc.</span></span><span class="sig-name descname"><span class="pre">get_unidirectional_electron_RDC_with_shielding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_vs_rdc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass_thickness_of_shield</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_range_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incident_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.get_unidirectional_electron_RDC_with_shielding" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the omnidirectional relative damage coefficient of a solar cell after some shielding, typically solar cell cover glass.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>energy_vs_rdc</strong> – 2d numpy array with column 0 being the particle energy and column 1 being the relative damage coefficienct</p></li>
+<li><p><strong>mass_thickness_of_shield</strong> – Mass thickness of the shielding being used in units of g/cm.  Derived by multiplying the density of the shield by the thickness of the shield</p></li>
+<li><p><strong>shield_range_table</strong> – Stopping power and range table for the shield</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2d numpy array of energy (column 0) and relative damage coefficients (column 2).  The relative damage coefficients are calculated after going through some shielded and adjusted from unidirectional test energies to omnidirectional test energies</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="electron_rdc.qual_data_from_file">
+<span class="sig-prename descclassname"><span class="pre">electron_rdc.</span></span><span class="sig-name descname"><span class="pre">qual_data_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rdc_txt_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.qual_data_from_file" title="Permalink to this definition"></a></dt>
 <dd><p>Gets rdc curve from txt file from qual report and interpolates it
 :param rdc_txt_file:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>interpolated rdc curve</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="electron_rdc.reference_particle_fit">
-<code class="sig-prename descclassname">electron_rdc.</code><code class="sig-name descname">reference_particle_fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">qual_data</span></em>, <em class="sig-param"><span class="n">reference_energy</span></em>, <em class="sig-param"><span class="n">fit_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fit_parameters</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">zero_fit</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.reference_particle_fit" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="electron_rdc.reference_particle_fit">
+<span class="sig-prename descclassname"><span class="pre">electron_rdc.</span></span><span class="sig-name descname"><span class="pre">reference_particle_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zero_fit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electron_rdc.reference_particle_fit" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>qual_data</strong> – </p></li>
 <li><p><strong>reference_energy</strong> – </p></li>
@@ -663,18 +607,18 @@
 <p>Returns:</p>
 </dd></dl>
 
-</div>
-<div class="section" id="proton-rdc">
-<h1>proton_rdc<a class="headerlink" href="#proton-rdc" title="Permalink to this headline">¶</a></h1>
+</section>
+<section id="proton-rdc">
+<h1>proton_rdc<a class="headerlink" href="#proton-rdc" title="Permalink to this heading"></a></h1>
 <p>Relative damage coefficients (RDC) are used to relate the relative damage of one particle energy to another.  The JPL radiation handbooks relate all particle energies and types to a 1MeV electron equivalent fluence, hence the name JPL Equivalent Fluence of JPL EQFLUX method.  According the JPL Handbooks, 1 MeV electron was choose because it is readily available for ground testing and the abundance of 1 MeV electron particles in the space environment. For protons all protons are related to 10 MeV protons.  The 10 MeV protons are then related to 1 MeV electrons.</p>
 <p>Note:  This module and the proton module can be combined to one rdc module.  The modules are seperate to reflect the procedure used in the JPL radiation hand books</p>
 <p>Note: Turns out since JPL EQFLUX was implemented and through DDD 10 MeV protons don’t actually do much damage……sooooo hmmmmm would it be better to relate all protons to a lower proton energy.</p>
 <span class="target" id="module-proton_rdc"></span><dl class="py function">
-<dt id="proton_rdc.get_omnidirectional_and_shielded_proton_rdc">
-<code class="sig-prename descclassname">proton_rdc.</code><code class="sig-name descname">get_omnidirectional_and_shielded_proton_rdc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">energy_vs_rdc</span></em>, <em class="sig-param"><span class="n">solar_cell_range_table</span></em>, <em class="sig-param"><span class="n">shield_range_table</span></em>, <em class="sig-param"><span class="n">solar_cell_displacement_table</span></em>, <em class="sig-param"><span class="n">solar_cell_thickness_cm</span></em>, <em class="sig-param"><span class="n">shield_thickness_cm</span></em><span class="sig-paren">)</span><a class="headerlink" href="#proton_rdc.get_omnidirectional_and_shielded_proton_rdc" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="proton_rdc.get_omnidirectional_and_shielded_proton_rdc">
+<span class="sig-prename descclassname"><span class="pre">proton_rdc.</span></span><span class="sig-name descname"><span class="pre">get_omnidirectional_and_shielded_proton_rdc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_vs_rdc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_range_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_range_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_displacement_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_thickness_cm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_thickness_cm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#proton_rdc.get_omnidirectional_and_shielded_proton_rdc" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the omnidirectional relative damage coefficient curve through shielding for protons following the procedures in the GaAs Solar Cell Radiation Handbook.  A key difference between this calculation and that for electrons is that protons can stop in the solar cell where they deposit most of their energy.  This end of track damage at the Bragg peak can lead to greater changes in the solar cell performance parameters.  The JPL method accounts for end of track damage by relating the the stopping distance of different energy particles and angles to that of the relative damage coefficient of the normally incident proton.  Also the relative damage coefficient is weighted by the ratio total displacements created for particle at an angle and its equivalent normal incidence energy at the same stopping depth.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>energy_vs_rdc</strong> (<em>ndarray</em>) – 2d numpy array with column 0 being the particle energy and column 1 being the relative damage coefficient</p></li>
 <li><p><strong>solar_cell_range_table</strong> (<em>ndarray</em>) – 2d numpy array of stopping range for protons in the solar cell material of interest.  Ideally this range table would be for the exact solar cell, but the range table for GaAs is typically used.  Column 1 is the proton energy and column 2 is the range in cm</p></li>
@@ -691,122 +635,145 @@
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="relativemev-fluence">
-<h1>relativeMeV_fluence<a class="headerlink" href="#relativemev-fluence" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="proton_rdc.get_unidirectional_and_shielded_proton_rdc">
+<span class="sig-prename descclassname"><span class="pre">proton_rdc.</span></span><span class="sig-name descname"><span class="pre">get_unidirectional_and_shielded_proton_rdc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_vs_rdc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_range_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_range_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_displacement_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_thickness_cm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_thickness_cm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incident_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#proton_rdc.get_unidirectional_and_shielded_proton_rdc" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the unidirectional relative damage coefficient curve through shielding for protons following the procedures in the GaAs Solar Cell Radiation Handbook.  A key difference between this calculation and that for electrons is that protons can stop in the solar cell where they deposit most of their energy.  This end of track damage at the Bragg peak can lead to greater changes in the solar cell performance parameters.  The JPL method accounts for end of track damage by relating the the stopping distance of different energy particles and angles to that of the relative damage coefficient of the normally incident proton.  Also the relative damage coefficient is weighted by the ratio total displacements created for particle at an angle and its equivalent normal incidence energy at the same stopping depth.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>energy_vs_rdc</strong> (<em>ndarray</em>) – 2d numpy array with column 0 being the particle energy and column 1 being the relative damage coefficient</p></li>
+<li><p><strong>solar_cell_range_table</strong> (<em>ndarray</em>) – 2d numpy array of stopping range for protons in the solar cell material of interest.  Ideally this range table would be for the exact solar cell, but the range table for GaAs is typically used.  Column 1 is the proton energy and column 2 is the range in cm</p></li>
+<li><p><strong>shield_range_table</strong> (<em>ndarray</em>) – 2d numpy array where column 1 is the proton energy and column 2 is the range in cm through the shielding material. For solar cells the shield is typically some type of glass.  Stopping and range table for a shield</p></li>
+<li><p><strong>solar_cell_displacement_table</strong> (<em>ndarray</em>) – 2d numpy array where column is proton energy and column 2 is the number of displacement created by the proton in the solar cell material.  The table is generated using TRIM 2018.  By using TRIM the number of displacements can be determined for each particle energy.  In the GaAs Solar Cell handbook the displacements are calculated using a the Kinche-Pease model</p></li>
+<li><p><strong>solar_cell_thickness_cm</strong> (<em>float</em>) – Thickness of the solar cell in cm</p></li>
+<li><p><strong>shield_thickness_cm</strong> (<em>float</em>) – Thickness of the shield in cm</p></li>
+<li><p><strong>incident_angle</strong> (<em>float</em><em> or </em><em>ndarray</em>) – angle radiation is entering the solar cell in degrees</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Returns (ndarray):</dt><dd><p>2d numpy array where column 1 is particle energy and column 2 is the relative damage coefficient</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="relativemev-fluence">
+<h1>relativeMeV_fluence<a class="headerlink" href="#relativemev-fluence" title="Permalink to this heading"></a></h1>
 <p>This module takes the relative damage coefficients of a solar cell type and the space environment particle spectrum to arrive and total 1 MeV fluence.  Using the 1 MeV electrion radiation data used to generate the RDC curve, one can predict the expected remaining factor of the parameter of interest in a solar cell</p>
 <span class="target" id="module-relativeMeV_fluence"></span><dl class="py function">
-<dt id="relativeMeV_fluence.get_cumulative_relative_fluence">
-<code class="sig-prename descclassname">relativeMeV_fluence.</code><code class="sig-name descname">get_cumulative_relative_fluence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">relative_damage_coefficients</span></em>, <em class="sig-param"><span class="n">differential_particle_spectrum</span></em><span class="sig-paren">)</span><a class="headerlink" href="#relativeMeV_fluence.get_cumulative_relative_fluence" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="relativeMeV_fluence.get_cumulative_relative_fluence">
+<span class="sig-prename descclassname"><span class="pre">relativeMeV_fluence.</span></span><span class="sig-name descname"><span class="pre">get_cumulative_relative_fluence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_damage_coefficients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">differential_particle_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#relativeMeV_fluence.get_cumulative_relative_fluence" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the cumulative 1MeV fluence for each particle energy</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>relative_damage_coefficients</strong> (<em>2d ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the relative damage coefficients</p></li>
 <li><p><strong>differential_particle_spectrum</strong> (<em>2d ndarray</em>) – 2d array where column 0 contains the particle energies and column 2 contains the differential particle fluence</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>2d nd array where column 0 is the particle energies and column 1 is the cumulative 1 Mev fluence.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="relativeMeV_fluence.get_energy_vs_relative_fluence">
-<code class="sig-prename descclassname">relativeMeV_fluence.</code><code class="sig-name descname">get_energy_vs_relative_fluence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">relative_damage_coefficients</span></em>, <em class="sig-param"><span class="n">differential_particle_spectrum</span></em><span class="sig-paren">)</span><a class="headerlink" href="#relativeMeV_fluence.get_energy_vs_relative_fluence" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="relativeMeV_fluence.get_energy_vs_relative_fluence">
+<span class="sig-prename descclassname"><span class="pre">relativeMeV_fluence.</span></span><span class="sig-name descname"><span class="pre">get_energy_vs_relative_fluence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_damage_coefficients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">differential_particle_spectrum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#relativeMeV_fluence.get_energy_vs_relative_fluence" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the energy vs 1 MeV fluence data.  The relative damage coefficients are interpolated for particle energies from the differential particle spectrum. The interpolation of the relative damage coefficients is accomplished by linear interpolation of the loglog of the relative damage coefficient. Relative damage coefficients outside the range of user supplied values is linearly extrapolated.  The interpolation and extrapolation of the relative damage coefficients is in accordance with the Solar Cell and GaAs Solar Cell Radiation Handbooks. The interpolated relative damage coefficients are multiplied by the differential fluence to yield the 1MeV fluence at each particle energy.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>relative_damage_coefficients</strong> (<em>2d ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the relative damage coefficients</p></li>
 <li><p><strong>differential_particle_spectrum</strong> (<em>2d ndarray</em>) – 2d array where column 0 contains the particle energies and column 2 contains the differential particle fluence</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>2d ndarray where column 0 is the particle energies and column 1 is the 1 MeV electron fluence. The particle energies are from the differential particle spectrum as the relative damage coefficients are interpolated and extropolated the differential particle spectrum.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="relativeMeV_fluence.get_relative_MeV_fluence_trapezoidal_integration">
-<code class="sig-prename descclassname">relativeMeV_fluence.</code><code class="sig-name descname">get_relative_MeV_fluence_trapezoidal_integration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">relative_damage_coefficients</span></em>, <em class="sig-param"><span class="n">differential_particle_spectrum</span></em><span class="sig-paren">)</span><a class="headerlink" href="#relativeMeV_fluence.get_relative_MeV_fluence_trapezoidal_integration" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="relativeMeV_fluence.get_relative_MeV_fluence_trapezoidal_integration">
+<span class="sig-prename descclassname"><span class="pre">relativeMeV_fluence.</span></span><span class="sig-name descname"><span class="pre">get_relative_MeV_fluence_trapezoidal_integration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_damage_coefficients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">differential_particle_spectrum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#relativeMeV_fluence.get_relative_MeV_fluence_trapezoidal_integration" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the total 1MeV fluence given the relative damage coefficients and differential particle spectrum. The relative damage coefficients are interpolated for particle energies from the differential particle spectrum. The interpolation of the relative damage coefficients is accomplished by linear interpolation of the loglog of the relative damage coefficient. Relative damage coefficients outside the range of user supplied values is linearly extrapolated.  The interpolation and extrapolation of the relative damage coefficients is in accordance with the Solar Cell and GaAs Solar Cell Radiation Handbooks.  The interpolated relative damage coefficients are multiplied by the differential fluence to yield the 1MeV fluence at each particle energy.  The energy vs 1MeV fluence data is then integrated over all particle energies to yield the total 1MeV fluence</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>relative_damage_coefficients</strong> (<em>ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the relative damage coefficients</p></li>
 <li><p><strong>differential_particle_spectrum</strong> (<em>ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the differential particle fluence</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Total 1MeV fluence</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="relativeMeV_fluence.get_relative_fluence_JPL_Aero">
-<code class="sig-prename descclassname">relativeMeV_fluence.</code><code class="sig-name descname">get_relative_fluence_JPL_Aero</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">relative_damage_coefficients</span></em>, <em class="sig-param"><span class="n">differential_particle_spectrum</span></em><span class="sig-paren">)</span><a class="headerlink" href="#relativeMeV_fluence.get_relative_fluence_JPL_Aero" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="relativeMeV_fluence.get_relative_fluence_JPL_Aero">
+<span class="sig-prename descclassname"><span class="pre">relativeMeV_fluence.</span></span><span class="sig-name descname"><span class="pre">get_relative_fluence_JPL_Aero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_damage_coefficients</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">differential_particle_spectrum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#relativeMeV_fluence.get_relative_fluence_JPL_Aero" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the 1 MeV electron fluence using the JPL EQFLUX method using the differential particle spectrum. The original JPL EQFLUX program takes the integral particle spectrum and does what seems like a step-by-step differentiation then a Riemann sum to arrive at the total 1 MeV fluence.  This functions also does a Riemann sum but takes out the differentiation of the integral spectrum and simply uses the differential spectrum. The differential particle spectrum for an environment is easily obtained from Spenvis on AE8/AP8 and AE9/AP9 radiation environment models.  This function is similar to the ‘oneMeVfluence_trapezoidalIntegration’ function. The difference being this function uses Riemann sum integral appoximation and the ‘oneMeVfluence_trapezoidalIntegration’ function uses trapezoidal integration.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>relative_damage_coefficients</strong> (<em>ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the relative damage coefficients</p></li>
 <li><p><strong>differential_particle_spectrum</strong> (<em>ndarray</em>) – 2d array where column 0 contains the particle energies and column 1 contains the differential particle fluence</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Total 1MeV fluence</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="relativeMeV_fluence.interpolate_electron_spectrum">
-<code class="sig-prename descclassname">relativeMeV_fluence.</code><code class="sig-name descname">interpolate_electron_spectrum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">integral_differential_electron_spectrum</span></em>, <em class="sig-param"><span class="n">energy_increment</span><span class="o">=</span><span class="default_value">0.01</span></em><span class="sig-paren">)</span><a class="headerlink" href="#relativeMeV_fluence.interpolate_electron_spectrum" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="relativeMeV_fluence.interpolate_electron_spectrum">
+<span class="sig-prename descclassname"><span class="pre">relativeMeV_fluence.</span></span><span class="sig-name descname"><span class="pre">interpolate_electron_spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral_differential_electron_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_increment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#relativeMeV_fluence.interpolate_electron_spectrum" title="Permalink to this definition"></a></dt>
 <dd><p>Interpolates the electron particle spectrum according to The GaAs Radiation Handbook.  The Handbook suggests interpolating the integral electron spectrum using linear interpolation of the “particle energy vs log(electron fluence)”</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>integral_differential_electron_spectrum</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the particle energy and column 1 is the electron fluence</p></li>
 <li><p><strong>energy_increment</strong> (<em>float</em>) – spacing in which to linearly interpolate spectrum</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A 2d numpy array of the interpolated electron spectrum where column 0 is the particle energy and column 1 is the electron fluence</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="relativeMeV_fluence.interpolate_proton_spectrum">
-<code class="sig-prename descclassname">relativeMeV_fluence.</code><code class="sig-name descname">interpolate_proton_spectrum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">integral_differential_proton_spectrum</span></em>, <em class="sig-param"><span class="n">energy_increment</span><span class="o">=</span><span class="default_value">0.001</span></em><span class="sig-paren">)</span><a class="headerlink" href="#relativeMeV_fluence.interpolate_proton_spectrum" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="relativeMeV_fluence.interpolate_proton_spectrum">
+<span class="sig-prename descclassname"><span class="pre">relativeMeV_fluence.</span></span><span class="sig-name descname"><span class="pre">interpolate_proton_spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integral_differential_proton_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_increment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#relativeMeV_fluence.interpolate_proton_spectrum" title="Permalink to this definition"></a></dt>
 <dd><p>Interpolates the proton particle spectrum according to The GaAs Radiation Handbook.  The Handbook suggests interpolating the integral pront spectrum using linear interpolation of the “log(particle energy) vs log(electron fluence)”</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>integral_differential_proton_spectrum</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the particle energy and column 1 is the proton fluence</p></li>
 <li><p><strong>energy_increment</strong> (<em>float</em>) – spacing in which to linearly interpolate spectrum</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A 2d numpy array of the interpolated electron spectrum where column 0 is the particle energy and column 1 is the proton fluence</p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="ddd">
-<h1>ddd<a class="headerlink" href="#ddd" title="Permalink to this headline">¶</a></h1>
+</section>
+<section id="ddd">
+<h1>ddd<a class="headerlink" href="#ddd" title="Permalink to this heading"></a></h1>
 <p>Displacement damage dose (DDD) tools to convert solar cell radiation data to displacement damage dose using the non-ionizing energy loss (NIEL) for a solar cell material of interest.  DDD uses the NIEL curve to determine the displacement damage dose from each particle type and energy as opposed to the RDC method in the JPL EQFLUX method.</p>
 <span class="target" id="module-ddd_degradation_functions"></span><dl class="py function">
-<dt id="ddd_degradation_functions.error_function_nValue_for_effectiveDDD">
-<code class="sig-prename descclassname">ddd_degradation_functions.</code><code class="sig-name descname">error_function_nValue_for_effectiveDDD</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameter</span></em>, <em class="sig-param"><span class="n">particle_energy</span></em>, <em class="sig-param"><span class="n">fluence</span></em>, <em class="sig-param"><span class="n">remaining_factor</span></em>, <em class="sig-param"><span class="n">NIEL</span></em>, <em class="sig-param"><span class="n">energy_to_normalize</span></em>, <em class="sig-param"><span class="n">fit_type</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.error_function_nValue_for_effectiveDDD" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ddd_degradation_functions.error_function_nValue_for_effectiveDDD">
+<span class="sig-prename descclassname"><span class="pre">ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">error_function_nValue_for_effectiveDDD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fluence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remaining_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_to_normalize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.error_function_nValue_for_effectiveDDD" title="Permalink to this definition"></a></dt>
 <dd><p>Error function used to find the the n value for radiation qualification data that does not collapse when using displacement damage dose.  For protons this has empirically determined to be 1 and for electrons the n value can range from 0.3-4</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>parameter</strong> – n value guess to minimize</p></li>
 <li><p><strong>particle_energy</strong> – particle energy</p></li>
@@ -817,21 +784,21 @@
 <li><p><strong>fit_type</strong> – fit using single degradation equation, ‘single’, or double degradation equation, ‘double’.  May add another option to fit using the A parameter</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>will look into using chi_squared instead</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Error to be minimized by using 1 - r2.  # TODO</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ddd_degradation_functions.fitToFindThresholdDisplacement">
-<code class="sig-prename descclassname">ddd_degradation_functions.</code><code class="sig-name descname">fitToFindThresholdDisplacement</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">NIELs_vs_Td</span></em>, <em class="sig-param"><span class="n">Tds</span></em>, <em class="sig-param"><span class="n">particle_energies_NIEL</span></em>, <em class="sig-param"><span class="n">particle_energies_qual_data</span></em>, <em class="sig-param"><span class="n">fluence</span></em>, <em class="sig-param"><span class="n">remaining_factor</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.fitToFindThresholdDisplacement" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ddd_degradation_functions.fitToFindThresholdDisplacement">
+<span class="sig-prename descclassname"><span class="pre">ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">fitToFindThresholdDisplacement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">NIELs_vs_Td</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_energies_NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_energies_qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fluence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remaining_factor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.fitToFindThresholdDisplacement" title="Permalink to this definition"></a></dt>
 <dd><p>Fit to find the best NIEL curve to fit displacement damage dose data that does not collapse using the single degradation equation.  The NIEL curves are selected based on the threshold displacement energy (Td) used to derive the NIEL curve.  This function takes a 2d table where x is Td and y is the particle energy to do interpolation to determine the best NIEL curve on Td.  Once the appropriate NIEL Td curve has been determined the actual NIEL curve using the Td derived from this fit should be used to check if it is correct. This is because 2d linear interpolation is used to derive the appropriate NIEL curve.  So far it looks to fit pretty well</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>NIELs_vs_Td</strong> – 2d numpy array of NIEL values only where the x values or columns are the threshold displacement energies used to calculate the NIEL curves and the y values or rows are the particle energies of the NIEL curves</p></li>
 <li><p><strong>Tds</strong> – 1d numpy array of the threshold displacement energies of the NIEL values in the NIELs_vs_Td data set</p></li>
@@ -841,18 +808,18 @@
 <li><p><strong>remaining_factor</strong> – of the remaining factors of the radiation data to be collapsed using displacement damage dose method</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Threshold displament energy of the NIEL curve that collapse the radiation data using a n value of 1</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ddd_degradation_functions.fitToFindThresholdDisplacement_double_degradation">
-<code class="sig-prename descclassname">ddd_degradation_functions.</code><code class="sig-name descname">fitToFindThresholdDisplacement_double_degradation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">NIELs_vs_Td</span></em>, <em class="sig-param"><span class="n">Tds</span></em>, <em class="sig-param"><span class="n">particle_energies_NIEL</span></em>, <em class="sig-param"><span class="n">particle_energies_qual_data</span></em>, <em class="sig-param"><span class="n">fluence</span></em>, <em class="sig-param"><span class="n">remaining_factor</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.fitToFindThresholdDisplacement_double_degradation" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ddd_degradation_functions.fitToFindThresholdDisplacement_double_degradation">
+<span class="sig-prename descclassname"><span class="pre">ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">fitToFindThresholdDisplacement_double_degradation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">NIELs_vs_Td</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_energies_NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_energies_qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fluence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remaining_factor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.fitToFindThresholdDisplacement_double_degradation" title="Permalink to this definition"></a></dt>
 <dd><p>Fit to find the best NIEL curve to fit displacement damage dose data that does not collapse using the double degradation equation.  The NIEL curves are selected based on the threshold displacement energy (Td) used to derive the NIEL curve.  This function takes a 2d table where x is Td and y is the particle energy to do interpolation to determine the best NIEL curve on Td.  Once the appropriate NIEL Td curve has been determined the actual NIEL curve using the Td derived from this fit should be used to check if it is correct. This is because 2d linear interpolation is used to derive the appropriate NIEL curve.  So far it looks to fit pretty well</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>NIELs_vs_Td</strong> – 2d numpy array of NIEL values only where the x values or colums are the threshold displacement energies used to calculate the NIEL curves and the y values or rows are the particle energies of the NIEL curves</p></li>
 <li><p><strong>Tds</strong> – 1d numpy array of the threshold displacement energies of the NIEL values in the NIELs_vs_Td data set</p></li>
@@ -862,18 +829,18 @@
 <li><p><strong>remaining_factor</strong> – of the remaining factors of the radiation data to be collapsed using displacement damage dose method</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Threshold displament energy of the NIEL curve that collapse the radiation data using a n value of 1</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ddd_degradation_functions.fit_nValue_effectiveDDD">
-<code class="sig-prename descclassname">ddd_degradation_functions.</code><code class="sig-name descname">fit_nValue_effectiveDDD</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">particle_energy</span></em>, <em class="sig-param"><span class="n">fluence</span></em>, <em class="sig-param"><span class="n">remaining_factor</span></em>, <em class="sig-param"><span class="n">NIEL</span></em>, <em class="sig-param"><span class="n">energy_to_normalize</span></em>, <em class="sig-param"><span class="n">fit_type</span><span class="o">=</span><span class="default_value">'single'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.fit_nValue_effectiveDDD" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ddd_degradation_functions.fit_nValue_effectiveDDD">
+<span class="sig-prename descclassname"><span class="pre">ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">fit_nValue_effectiveDDD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fluence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remaining_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_to_normalize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'single'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.fit_nValue_effectiveDDD" title="Permalink to this definition"></a></dt>
 <dd><p>Give the particle energies, fluences, and remaining factors of an irradiated cell this function fits the data to find the n_value that best collapses the displacement damage dose curves.  The function minimizes by fitting the displacement damage dose curves using the degradation equation and n value to find the best bit using r squared as the fitting parameter.  I have found this to provide better fits than those in the SCREAM model fits</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>particle_energy</strong> (<em>ndarray of float</em>) – 1d numpy array of particle energies or single float value of particle energies</p></li>
 <li><p><strong>fluence</strong> (<em>ndarray</em>) – 1d numpy array of fluences.  The fluences are converted to displacement damage dose using the NIEL curve</p></li>
@@ -882,32 +849,32 @@
 <li><p><strong>energy_to_normalize</strong> (<em>float</em>) – particle energy to normalize the effective displacement damage dose curve. This value is typically 1 for 1MeV electrons</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The n value that best collapses the displacement damage dose curves</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ddd_degradation_functions.getTotalDDD">
-<code class="sig-prename descclassname">ddd_degradation_functions.</code><code class="sig-name descname">getTotalDDD</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">energy_vs_ddd</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.getTotalDDD" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ddd_degradation_functions.getTotalDDD">
+<span class="sig-prename descclassname"><span class="pre">ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">getTotalDDD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy_vs_ddd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.getTotalDDD" title="Permalink to this definition"></a></dt>
 <dd><p>Takes a given displacement damage dose particle spectrum and calculates the total displacement damage dose expected for a given environment</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>energy_vs_ddd</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the particle energy and column 1 is the displacment damage does per particle energy</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The total displacement damage does in a given particle environment</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ddd_degradation_functions.get_cumulative_ddd">
-<code class="sig-prename descclassname">ddd_degradation_functions.</code><code class="sig-name descname">get_cumulative_ddd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">particle_spectrum</span></em>, <em class="sig-param"><span class="n">NIEL</span></em>, <em class="sig-param"><span class="n">energy_to_normalize</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_value</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">norm</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.get_cumulative_ddd" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ddd_degradation_functions.get_cumulative_ddd">
+<span class="sig-prename descclassname"><span class="pre">ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">get_cumulative_ddd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_to_normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.get_cumulative_ddd" title="Permalink to this definition"></a></dt>
 <dd><p>Return the cumulative displacement damage dose spectrum for a give environment particle spectrum using the non-ionizing energy loss curve</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>particle_spectrum</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the particle energy and column 1 is the partcle fluence</p></li>
 <li><p><strong>NIEL</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the particle energy and column 1 is the non-ionizing energy loss</p></li>
@@ -916,18 +883,18 @@
 <li><p><strong>norm</strong> (<em>bool</em>) – Optional argument to normalize the cumulative ddisplacement damage dose to 1 if set to True</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>2d numpy array where column 0 is the particle energy and column 1 is the cumulative displacement damage dose</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ddd_degradation_functions.get_ddd">
-<code class="sig-prename descclassname">ddd_degradation_functions.</code><code class="sig-name descname">get_ddd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">particle_energy</span></em>, <em class="sig-param"><span class="n">fluence</span></em>, <em class="sig-param"><span class="n">NIEL</span></em>, <em class="sig-param"><span class="n">energy_to_normalize</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_value</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.get_ddd" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ddd_degradation_functions.get_ddd">
+<span class="sig-prename descclassname"><span class="pre">ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">get_ddd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fluence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_to_normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.get_ddd" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the  displacement damage dose.  For protons the “n” value is 1 and the energy to normalize isn’t necessary. When calculating effective displacement damage dose an empirically determined “n” value is used to collapse the electron displacement damage curves for different particle energies.  The n value can be derived by fitting displacement damage curves to for a n until they collapse.  N can be anywhere from 0 to 4 as determined in the literature</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>particle_energy</strong> – particle energy</p></li>
 <li><p><strong>fluence</strong> – fluence</p></li>
@@ -936,18 +903,18 @@
 <li><p><strong>n_value</strong> – Empirically determined fitting parameter to collapse displacement damage dose curves that do not collapse. It is 1 for protons</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>1d numpy array of effective displacement damage dose</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ddd_degradation_functions.get_ddd_vs_remaining_factor">
-<code class="sig-prename descclassname">ddd_degradation_functions.</code><code class="sig-name descname">get_ddd_vs_remaining_factor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">particle_energy</span></em>, <em class="sig-param"><span class="n">fluence</span></em>, <em class="sig-param"><span class="n">remaining_factor</span></em>, <em class="sig-param"><span class="n">NIEL</span></em>, <em class="sig-param"><span class="n">energy_to_normalize</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.get_ddd_vs_remaining_factor" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ddd_degradation_functions.get_ddd_vs_remaining_factor">
+<span class="sig-prename descclassname"><span class="pre">ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">get_ddd_vs_remaining_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fluence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remaining_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_to_normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.get_ddd_vs_remaining_factor" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the 2d numpy array of displacement damage dose vs energy.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>particle_energy</strong> (<em>ndarray</em><em> or </em><em>float</em>) – particle energy</p></li>
 <li><p><strong>fluence</strong> (<em>ndarray</em>) – 1d numpy array of fluence</p></li>
@@ -957,18 +924,18 @@
 <li><p><strong>n</strong> (<em>float</em>) – Empirically determined fitting parameter to collapse displacement damage dose curves that do not collapse. It is 1 for protons</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>2d numpy array where column 0 is the displacement damage dose and column 1 is the remaining factor</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ddd_degradation_functions.get_ddd_vs_remaining_factor_by_particle_energy">
-<code class="sig-prename descclassname">ddd_degradation_functions.</code><code class="sig-name descname">get_ddd_vs_remaining_factor_by_particle_energy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">qual_data</span></em>, <em class="sig-param"><span class="n">NIEL</span></em>, <em class="sig-param"><span class="n">energy_to_normalize</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_value</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.get_ddd_vs_remaining_factor_by_particle_energy" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ddd_degradation_functions.get_ddd_vs_remaining_factor_by_particle_energy">
+<span class="sig-prename descclassname"><span class="pre">ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">get_ddd_vs_remaining_factor_by_particle_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_to_normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.get_ddd_vs_remaining_factor_by_particle_energy" title="Permalink to this definition"></a></dt>
 <dd><p>Organizes a table of radiation qualification data into groups based on particle energy.  This function is useful for organizing radiation qualification data tables for plotting and analysis</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>qual_data</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is hte particle energy for each fluence, column 1 is the fluence, and column 2 is the remaining factor</p></li>
 <li><p><strong>NIEL</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the particle energy and column 1 is the non-ionizing energy loss</p></li>
@@ -976,18 +943,18 @@
 <li><p><strong>n_value</strong> (<em>float</em>) – Empirically determined fitting parameter to collapse displacement damage dose curves that do not collapse. It is 1 for protons</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A list of 2d numpy arrays where each element in the list represents one particle energy and and each array in the list is composed of three columns where column 1 is the particle energy, column 2 is the fluence, and column 3 is the remaining factor</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ddd_degradation_functions.get_energy_vs_ddd">
-<code class="sig-prename descclassname">ddd_degradation_functions.</code><code class="sig-name descname">get_energy_vs_ddd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">particle_spectrum</span></em>, <em class="sig-param"><span class="n">NIEL</span></em>, <em class="sig-param"><span class="n">energy_to_normalize</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_value</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.get_energy_vs_ddd" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ddd_degradation_functions.get_energy_vs_ddd">
+<span class="sig-prename descclassname"><span class="pre">ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">get_energy_vs_ddd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIEL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy_to_normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.get_energy_vs_ddd" title="Permalink to this definition"></a></dt>
 <dd><p>Takes a give particle spectrum for an environment and calculates the displacement damage dose for that environment using the non-ionizing energy loss curve.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>particle_spectrum</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the particle energy and column 1 is the partcle fluence</p></li>
 <li><p><strong>NIEL</strong> (<em>ndarray</em>) – 2d numpy array where column 0 is the particle energy and column 1 is the non-ionizing energy loss</p></li>
@@ -995,18 +962,18 @@
 <li><p><strong>n_value</strong> (<em>float</em>) – Empirically determined fitting parameter to collapse displacement damage dose curves that do not collapse. It is 1 for protons</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>2d numpy array where column 0 is the particle energy and column 1 is the displacement damage dose.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ddd_degradation_functions.interpolateNIELvsTd">
-<code class="sig-prename descclassname">ddd_degradation_functions.</code><code class="sig-name descname">interpolateNIELvsTd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">newTd</span></em>, <em class="sig-param"><span class="n">NIELs_vs_Td</span></em>, <em class="sig-param"><span class="n">Tds</span></em>, <em class="sig-param"><span class="n">particle_energies</span></em>, <em class="sig-param"><span class="n">kind</span><span class="o">=</span><span class="default_value">'linear'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.interpolateNIELvsTd" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ddd_degradation_functions.interpolateNIELvsTd">
+<span class="sig-prename descclassname"><span class="pre">ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">interpolateNIELvsTd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">newTd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIELs_vs_Td</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particle_energies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.interpolateNIELvsTd" title="Permalink to this definition"></a></dt>
 <dd><p>By using 2d interpolation of a table of NIEL values for various Tds, this function will return a NIEL curve at a specific Td using 2d linear interpolation.  The appropriate method would simple be to caluculate the NIEL curve instead of doing linear interpolation. This funtion will be replaced with the calculation in the future</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>newTd</strong> (<em>float</em>) – Threshold displacement energy to derive a new non-ionizing energy loss curve</p></li>
 <li><p><strong>NIELs_vs_Td</strong> (<em>ndarray</em>) – 2d numpy array of NIEL values only where the x values or colums are the threshold displacement energies used to calculate the NIEL curves and the y values or rows are the particle energies of the NIEL curves</p></li>
@@ -1015,39 +982,39 @@
 <li><p><strong>kind</strong> (<em>str</em>) – The type if interpolation to use. The default is ‘linear”.  Refer to documentation on scipy interp2d for other interpolation methods</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>2d numpy arrary where column 0 is the particle energy and column 1 is the NIEL curve using the user defined threshold displacement energy</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ddd_degradation_functions.lookupNIELValue">
-<code class="sig-prename descclassname">ddd_degradation_functions.</code><code class="sig-name descname">lookupNIELValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">particle_energy</span></em>, <em class="sig-param"><span class="n">NIEL</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.lookupNIELValue" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ddd_degradation_functions.lookupNIELValue">
+<span class="sig-prename descclassname"><span class="pre">ddd_degradation_functions.</span></span><span class="sig-name descname"><span class="pre">lookupNIELValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particle_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NIEL</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ddd_degradation_functions.lookupNIELValue" title="Permalink to this definition"></a></dt>
 <dd><p>Finds a NIEL for a given particle energy.  Basically interpolates the data to find the NIEL</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>particle_energy</strong> – particle energy you want the NIEL value for</p></li>
 <li><p><strong>NIEL</strong> (<em>ndarray</em>) – the 2D numpy array of particle energy vs NIEL</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>NIEL value at the chosen particle energy</p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="example-class">
-<h1>Example Class<a class="headerlink" href="#example-class" title="Permalink to this headline">¶</a></h1>
+</section>
+<section id="example-class">
+<h1>Example Class<a class="headerlink" href="#example-class" title="Permalink to this heading"></a></h1>
 <p>Several classes built with the library to simplify use.</p>
 <span class="target" id="module-eqflux_aero"></span><dl class="py class">
-<dt id="eqflux_aero.eqflux_aero">
-<em class="property">class </em><code class="sig-prename descclassname">eqflux_aero.</code><code class="sig-name descname">eqflux_aero</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">electron_qual_data</span></em>, <em class="sig-param"><span class="n">proton_qual_data</span></em>, <em class="sig-param"><span class="n">electron_differential_spectrum</span></em>, <em class="sig-param"><span class="n">proton_differential_spectrum</span></em>, <em class="sig-param"><span class="n">electron_reference_energy</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">proton_reference_energy</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">critical_remaining_factor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">density_of_shield</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">shield_thickness_cm</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">proton_shield_range_table</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">electron_shield_range_table</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">solar_cell_range_table</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">solar_cell_displacement_table</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">solar_cell_thickness_cm</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">electron_energy_vs_rdc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">proton_energy_vs_rdc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">proton_to_electron_conversion_factor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">p_fit_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">p_fit_parameters</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">e_fit_type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">e_fit_parameters</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#eqflux_aero.eqflux_aero" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="eqflux_aero.eqflux_aero">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">eqflux_aero.</span></span><span class="sig-name descname"><span class="pre">eqflux_aero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">electron_qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proton_qual_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">electron_differential_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proton_differential_spectrum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">electron_reference_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proton_reference_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">critical_remaining_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">density_of_shield</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shield_thickness_cm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proton_shield_range_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">electron_shield_range_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_range_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_displacement_table</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solar_cell_thickness_cm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">electron_energy_vs_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proton_energy_vs_rdc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proton_to_electron_conversion_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_fit_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_fit_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#eqflux_aero.eqflux_aero" title="Permalink to this definition"></a></dt>
 <dd><p>Class that derives all EQFLUX parameters for a solar cell including, the RDC of electrons, protons as well as the remaining factor.  If giving the environment spectrum the remaining factor of the solar cell can be calculated.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>electron_qual_data</strong> (<em>ndarray</em>) – [description]</p></li>
 <li><p><strong>proton_qual_data</strong> (<em>ndarray</em>) – [description]</p></li>
@@ -1071,60 +1038,43 @@
 </dd>
 </dl>
 <dl class="py method">
-<dt id="eqflux_aero.eqflux_aero.update">
-<code class="sig-name descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#eqflux_aero.eqflux_aero.update" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="eqflux_aero.eqflux_aero.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#eqflux_aero.eqflux_aero.update" title="Permalink to this definition"></a></dt>
 <dd><p>Updates member variables</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="Welcome to solarpy’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Don Walker.
-
-    </p>
+    <p>&#169; Copyright 2021, Don Walker.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
